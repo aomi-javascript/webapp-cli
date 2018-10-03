@@ -9,7 +9,9 @@ const {NODE_ENV = 'development'} = process.env;
 
 const DEBUG = NODE_ENV !== 'production';
 
-const srcDirs = path.resolve(__dirname, 'src');
+const appHome = process.cwd();
+
+const srcDirs = path.resolve(appHome, 'src');
 const buildDir = 'build/app';
 const scriptDir = 'javascript';
 const styleDir = 'stylesheets';
@@ -20,7 +22,7 @@ const dll = ['polyfill'];
 
 const assets = [{
   // Glob to match all of the dll file
-  filepath: path.resolve(__dirname, `build/dll/*.dll.js`),
+  filepath: path.resolve(appHome, 'build/dll/*.dll.js'),
   publicPath: `./${scriptDir}`,
   outputPath: scriptDir,
 }];
@@ -34,16 +36,16 @@ export default {
     app: './src/index.tsx'
   },
   output: {
-    path: path.join(__dirname, buildDir),
+    path: path.join(appHome, buildDir),
     filename: `${scriptDir}/[name]-[hash].bundle.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
     alias: {
-      'object-assign': path.resolve(path.join(__dirname, 'node_modules', 'object-assign')),
-      react: path.resolve(path.join(__dirname, 'node_modules', 'react')),
-      'react-dom': path.resolve(path.join(__dirname, 'node_modules', 'react-dom')),
-      immutable: path.resolve(path.join(__dirname, 'node_modules', 'immutable'))
+      'object-assign': path.resolve(path.join(appHome, 'node_modules', 'object-assign')),
+      react: path.resolve(path.join(appHome, 'node_modules', 'react')),
+      'react-dom': path.resolve(path.join(appHome, 'node_modules', 'react-dom')),
+      immutable: path.resolve(path.join(appHome, 'node_modules', 'immutable'))
     },
     modules: [
       'node_modules'
@@ -67,7 +69,7 @@ export default {
     new AddAssetHtmlPlugin(assets),
     ...dll.map(dllName => new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require(`./build/dll/${dllName}.manifest.json`)
+      manifest: require(`${appHome}/build/dll/${dllName}.manifest.json`)
     }))
   ],
   module: {

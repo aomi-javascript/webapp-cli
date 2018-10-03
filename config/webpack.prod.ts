@@ -1,7 +1,8 @@
-const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+import * as webpack from 'webpack';
 
-module.exports = {
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+
+export default {
   devtool: false,
   optimization: {
     minimizer: [new UglifyJSPlugin()]

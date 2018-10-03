@@ -28,6 +28,6 @@ try {
   const handler = require(cmdExecFile);
   handler.execute(options);
 } catch (e) {
-  console.error(`未知的命令: ${cmd}`, e);
+  console.error(e);
   process.exit(1);
 }

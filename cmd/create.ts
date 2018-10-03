@@ -7,6 +7,7 @@ const dependencies = [
   '@sitb/svg-icon',
   '@sitb/wbs',
   'connected-react-router',
+  'es6-promise',
   'react',
   'react-dom',
   'react-redux',
@@ -14,11 +15,16 @@ const dependencies = [
   'redux',
   'redux-observable',
   'rxjs',
-  'veigar'
+  'veigar',
+  'whatwg-fetch'
 ];
 
 const devDependencies = [
-  '@sitb/arapp-cli'
+  '@sitb/arapp-cli',
+  'add-asset-html-webpack-plugin',
+  'clean-webpack-plugin',
+  'html-webpack-plugin',
+  'mini-css-extract-plugin'
 ];
 
 /**

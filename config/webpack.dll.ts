@@ -1,18 +1,19 @@
 import * as path from 'path';
-import webpack from 'webpack';
+import * as webpack from 'webpack';
 
 const {NODE_ENV = 'development'} = process.env;
 
-const buildDir = path.join(__dirname, 'build', 'dll');
+const appHome = process.cwd();
+const buildDir = path.join(appHome, 'build', 'dll');
 
 export default {
   entry: {
-    polyfill: ['whatwg-fetch', 'es6-promise']
+    polyfill: ['@babel/polyfill', 'whatwg-fetch', 'es6-promise']
   },
   output: {
     filename: '[name].dll.js',
     path: buildDir,
-    library: '_dll_[name]_[hash]' // 全局变量名
+    library: '_dll_[name]_[hash]'
   },
   mode: NODE_ENV,
   plugins: [
