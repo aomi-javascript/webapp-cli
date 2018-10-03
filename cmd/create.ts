@@ -25,7 +25,8 @@ const devDependencies = [
   'awesome-typescript-loader',
   'clean-webpack-plugin',
   'html-webpack-plugin',
-  'mini-css-extract-plugin'
+  'mini-css-extract-plugin',
+  'style-loader'
 ];
 
 /**
