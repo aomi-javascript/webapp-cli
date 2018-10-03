@@ -2,6 +2,7 @@ import * as webpack from 'webpack';
 import * as merge from 'webpack-merge';
 import * as fs from 'fs-extra';
 
+import { execute as dll } from './dll';
 import common from '../config/webpack.prod';
 
 /**
@@ -18,9 +19,16 @@ export function execute() {
   } catch (e) {
   }
   const finalConfig = merge(common, userProdConfig);
-  webpack(finalConfig, (err, stats) => {
-    if (err || stats.hasErrors()) {
-      console.error(err);
-    }
+  dll(() => {
+    webpack(finalConfig).run((err, stats) => {
+      if (err || stats.hasErrors()) {
+        console.error(err);
+        return;
+      }
+      console.log(stats.toString({
+        chunks: false,  // Makes the build much quieter
+        colors: true    // Shows colors in the console
+      }));
+    });
   });
 }
