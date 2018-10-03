@@ -33,7 +33,7 @@ function getImageLoader(mimetype) {
 
 export default {
   entry: {
-    app: './src/index.tsx'
+    app: path.join(srcDirs, 'index.web.tsx')
   },
   output: {
     path: path.join(appHome, buildDir),
