@@ -1,3 +1,5 @@
+module.exports = function (params) {
+  return `
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -13,3 +15,5 @@
 <div id="application">正在加载...</div>
 </body>
 </html>
+`;
+};
