@@ -3,15 +3,14 @@
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/2
  */
-import { Command } from 'commander';
-
+import * as program from 'commander';
 import * as path from 'path';
 
 const pkg = require('./package.json');
 
 let cmd = '', options = '';
 
-new Command('arapp')
+program
   .version(pkg.version, '-v, --version')
   .command('create <name>', '创建一个 React App.')
   .command('start', '启用应用')
