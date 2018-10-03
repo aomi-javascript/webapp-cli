@@ -3,6 +3,7 @@ import * as webpack from 'webpack';
 import * as UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 export default {
+  mode: 'production',
   devtool: false,
   optimization: {
     minimizer: [new UglifyJSPlugin()]

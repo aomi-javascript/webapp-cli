@@ -2,6 +2,7 @@ import * as webpack from 'webpack';
 import common from './webpack.common';
 
 export default {
+  mode: 'development',
   devtool: 'source-map',
   devServer: {
     hot: true,

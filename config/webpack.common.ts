@@ -7,11 +7,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const {NODE_ENV = 'development'} = process.env;
 
+console.log(`NODE_ENV=${NODE_ENV}`);
 const DEBUG = NODE_ENV !== 'production';
 
 const appHome = process.cwd();
-
-const srcDirs = path.resolve(appHome, 'src');
+console.log(`APP_HOME=${appHome}`);
+const srcDirs = path.join(appHome, 'src');
 const buildDir = path.join(appHome, 'build', 'app');
 const scriptDir = 'javascript';
 const styleDir = 'stylesheets';
@@ -36,7 +37,7 @@ export default {
     app: path.join(srcDirs, 'index.web.tsx')
   },
   output: {
-    path: path.join(appHome, buildDir),
+    path: buildDir,
     filename: `${scriptDir}/[name]-[hash].bundle.js`
   },
   resolve: {
@@ -51,7 +52,6 @@ export default {
       'node_modules'
     ]
   },
-  mode: NODE_ENV,
   plugins: [
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
