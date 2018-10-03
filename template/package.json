@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "arapp",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@sitb/svg-icon": "^1.0.1",
+    "@sitb/wbs": "^1.0.82",
+    "connected-react-router": "^4.5.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.3.3",
+    "veigar": "^1.0.0-Alpha.12"
+  }
+}
