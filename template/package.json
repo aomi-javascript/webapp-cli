@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "arapp start",
-    "bundle": "arapp bundle"
+    "start": "arapp serve",
+    "bundle": "arapp bundle",
+    "dll": "arapp dll"
   },
   "author": "Sean"
 }
