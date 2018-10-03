@@ -10,7 +10,6 @@ const pkg = require('./package.json');
 
 program
   .version(pkg.version, '-v, --version')
-  .command('arapp')
   .description('A React Application Manager')
 ;
 
