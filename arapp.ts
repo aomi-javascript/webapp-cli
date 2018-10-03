@@ -31,7 +31,10 @@ program
 program
   .command('bundle')
   .description('编译打包应用')
-  .action(() => run('bundle', {}))
+  .action(() => {
+    process.env.NODE_ENV = 'production';
+    run('bundle', {});
+  })
 ;
 
 program
