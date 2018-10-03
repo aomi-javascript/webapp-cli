@@ -29,7 +29,7 @@ program
 ;
 
 program
-  .command('bundle', '打包应用')
+  .command('bundle')
   .description('编译打包应用')
   .action(() => run('bundle', {}))
 ;
