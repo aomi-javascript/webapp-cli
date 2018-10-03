@@ -12,7 +12,7 @@ const DEBUG = NODE_ENV !== 'production';
 const appHome = process.cwd();
 
 const srcDirs = path.resolve(appHome, 'src');
-const buildDir = 'build/app';
+const buildDir = path.join(appHome, 'build', 'app');
 const scriptDir = 'javascript';
 const styleDir = 'stylesheets';
 const imagesDir = 'images';
@@ -64,11 +64,13 @@ export default {
       filename: `${styleDir}/[name]-[hash].css`,
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
-    new CleanWebpackPlugin([buildDir]),
+    new CleanWebpackPlugin([buildDir], {
+      root: appHome
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new AddAssetHtmlPlugin(assets),
     ...dll.map(dllName => new webpack.DllReferencePlugin({
-      context: __dirname,
+      context: appHome,
       manifest: require(`${appHome}/build/dll/${dllName}.manifest.json`)
     }))
   ],
