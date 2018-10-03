@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+/**
+ * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/2
+ */
+import { Command } from 'commander';
+
+import * as path from 'path';
+
+const pkg = require('./package.json');
+
+let cmd = '', options = '';
+
+new Command('arapp')
+  .version(pkg.version, '-v, --version')
+  .command('create <name>', '创建一个 React App.')
+  .command('start', '启用应用')
+  .command('bundle', '打包应用')
+  .action((c, o) => {
+    cmd = c;
+    options = o;
+  })
+  .parse(process.argv)
+;
+
+const cmdExecFile = path.join(__dirname, 'cmd', `${cmd}.js`);
+try {
+  const handler = require(cmdExecFile);
+  handler.execute(options);
+} catch (e) {
+  console.error(`未知的命令: ${cmd}`, e);
+  process.exit(1);
+}

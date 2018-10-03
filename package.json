@@ -1,0 +1,46 @@
+{
+  "name": "@sitb/arapp-cli",
+  "version": "1.0.0-Aplha.4",
+  "description": "A React Application",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc && tsc -w",
+    "clean": "rm -rf lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@onegit.app:enterprise/arapp-cli.git"
+  },
+  "keywords": [
+    "React"
+  ],
+  "author": "Sean",
+  "license": "ISC",
+  "bin": {
+    "arapp": "./arapp.js"
+  },
+  "files": [
+    "cmd/**/*.js",
+    "config",
+    "template",
+    "arapp.js",
+    "package.json",
+    "README.md",
+    "yarn.lock"
+  ],
+  "dependencies": {
+    "commander": "^2.18.0",
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^7.0.0",
+    "webpack": "^4.20.2",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^10.11.3",
+    "typescript": "^3.1.1"
+  }
+}
