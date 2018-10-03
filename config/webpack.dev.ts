@@ -1,5 +1,6 @@
 import * as webpack from 'webpack';
 import common from './webpack.common';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default {
   mode: 'development',
@@ -18,6 +19,7 @@ export default {
     }
   },
   plugins: [
+    new BundleAnalyzerPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
