@@ -22,6 +22,7 @@ const dependencies = [
 const devDependencies = [
   '@sitb/arapp-cli',
   'add-asset-html-webpack-plugin',
+  'awesome-typescript-loader',
   'clean-webpack-plugin',
   'html-webpack-plugin',
   'mini-css-extract-plugin'
