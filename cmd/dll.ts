@@ -7,7 +7,7 @@ import common from '../config/webpack.dll';
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
  */
-export function execute() {
+export function execute(callback) {
   const dllConfig = `${process.cwd()}/webpack.dll.js`;
 
   let userDllConfig = {};
@@ -31,5 +31,7 @@ export function execute() {
       chunks: false,  // Makes the build much quieter
       colors: true    // Shows colors in the console
     }));
+    console.log('bundle dll ok..');
+    callback && callback();
   });
 }
