@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import * as UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 export default {
   devtool: false,
