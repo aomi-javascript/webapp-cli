@@ -28,17 +28,19 @@ export default class App extends React.Component<any, any> {
   render() {
     return (
       <HashRouter>
-        <Route exact
-               path="/"
-               render={() => (<Redirect to="/home"/>)}
-        />
-        {routes.map((route: any, index) => (
-          <Route path={route.path}
-                 render={createRender(route)}
-                 key={index}
-                 exact={route.exact}
+        <React.Fragment>
+          <Route exact
+                 path="/"
+                 render={() => (<Redirect to="/home"/>)}
           />
-        ))}
+          {routes.map((route: any, index) => (
+            <Route path={route.path}
+                   render={createRender(route)}
+                   key={index}
+                   exact={route.exact}
+            />
+          ))}
+        </React.Fragment>
       </HashRouter>
     );
   }
