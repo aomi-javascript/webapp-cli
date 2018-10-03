@@ -8,26 +8,51 @@ import * as path from 'path';
 
 const pkg = require('./package.json');
 
-let cmd = '', options = '';
-
 program
   .version(pkg.version, '-v, --version')
-  .command('create <name>', '创建一个 React App.')
-  .command('run', '启用应用')
-  .command('bundle', '打包应用')
-  .command('dll', '创建依赖库')
-  .action((c, o) => {
-    cmd = c;
-    options = o;
+  .command('arapp')
+  .description('A React Application Manager')
+;
+
+program
+  .command('create <name>')
+  .description('创建一个React Application')
+  .action((name) => run('create', name))
+;
+
+program
+  .command('serve')
+  .description('启动一个开发服务器')
+  .option('-p, --port', '监听端口')
+  .action(() => {
+    run('serve', {});
   })
+;
+
+program
+  .command('bundle', '打包应用')
+  .description('编译打包应用')
+  .action(() => run('bundle', {}))
+;
+
+program
+  .command('dll')
+  .description('创建依赖库')
+  .action(() => run('dll', {}))
+;
+
+program
   .parse(process.argv)
 ;
 
-const cmdExecFile = path.join(__dirname, 'cmd', `${cmd}.js`);
-try {
-  const handler = require(cmdExecFile);
-  handler.execute(options);
-} catch (e) {
-  console.error(e);
-  process.exit(1);
+function run(cmd, options) {
+  const cmdExecFile = path.join(__dirname, 'cmd', `${cmd}.js`);
+  try {
+    const handler = require(cmdExecFile);
+    handler.execute(options);
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
 }
+
