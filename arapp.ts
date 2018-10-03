@@ -13,8 +13,9 @@ let cmd = '', options = '';
 program
   .version(pkg.version, '-v, --version')
   .command('create <name>', '创建一个 React App.')
-  .command('start', '启用应用')
+  .command('run', '启用应用')
   .command('bundle', '打包应用')
+  .command('dll', '创建依赖库')
   .action((c, o) => {
     cmd = c;
     options = o;
