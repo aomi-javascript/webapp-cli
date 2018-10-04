@@ -7,10 +7,10 @@ const {NODE_ENV = 'development'} = process.env;
 const appHome = process.cwd();
 const buildDir = path.join(appHome, 'build', 'dll');
 
+const userPkg = require(path.join(appHome, 'package.json'));
+
 export default {
-  entry: {
-    polyfill: ['@babel/polyfill', 'whatwg-fetch', 'es6-promise']
-  },
+  entry: userPkg.dllEntry,
   output: {
     filename: '[name].dll.js',
     path: buildDir,
