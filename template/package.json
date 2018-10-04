@@ -8,5 +8,12 @@
     "bundle": "arapp bundle",
     "dll": "arapp dll"
   },
-  "author": "Sean"
+  "author": "Sean",
+  "dllEntry": {
+    "polyfill": [
+      "@babel/polyfill",
+      "whatwg-fetch",
+      "es6-promise"
+    ]
+  }
 }
