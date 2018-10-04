@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import * as path from 'path';
+import * as webpack from 'webpack';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const {NODE_ENV = 'development'} = process.env;
 
