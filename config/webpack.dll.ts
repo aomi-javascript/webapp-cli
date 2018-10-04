@@ -16,6 +16,7 @@ export default {
     path: buildDir,
     library: '_dll_[name]_[hash]'
   },
+  context: appHome,
   mode: NODE_ENV,
   devtool: NODE_ENV === 'production' ? false : 'source-map',
   plugins: [

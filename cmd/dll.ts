@@ -9,11 +9,7 @@ import getUserWebpackConfig from '../utils/getUserWebpackConfig';
  */
 export function execute() {
   return new Promise((resolve, reject) => {
-    const finalConfig = merge(
-      common, {
-        context: process.cwd()
-      }, getUserWebpackConfig('dll')
-    );
+    const finalConfig = merge(common, getUserWebpackConfig('dll'));
     webpack(finalConfig, (err, stats) => {
       if (err) {
         console.error(err);

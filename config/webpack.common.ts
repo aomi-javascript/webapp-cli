@@ -52,6 +52,7 @@ export default {
       'node_modules'
     ]
   },
+  context: appHome,
   plugins: [
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
@@ -78,7 +79,7 @@ export default {
     rules: [{
       test: /\.(tsx|ts)$/,
       use: 'awesome-typescript-loader',
-      include: srcDirs // 指定需要加载的文件夹
+      include: srcDirs
     }, {
       test: /\.css$/,
       use: [{
