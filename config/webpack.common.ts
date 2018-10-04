@@ -59,7 +59,8 @@ export default {
     }),
     new HtmlWebpackPlugin({
       template: path.join(srcDirs, 'index.html.js'),
-      debug: DEBUG
+      debug: DEBUG,
+      env: process.env
     }),
     new MiniCssExtractPlugin({
       filename: `${styleDir}/[name]-[hash].css`,
