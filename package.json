@@ -1,6 +1,6 @@
 {
   "name": "@sitb/arapp-cli",
-  "version": "1.0.0-Aplha.22",
+  "version": "1.0.0-Aplha.23",
   "description": "A React Application",
   "main": "index.js",
   "scripts": {
