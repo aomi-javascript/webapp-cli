@@ -78,8 +78,7 @@ export default {
   module: {
     rules: [{
       test: /\.(tsx|ts)$/,
-      use: 'awesome-typescript-loader',
-      include: srcDirs
+      use: 'awesome-typescript-loader'
     }, {
       test: /\.css$/,
       use: [{
