@@ -9,9 +9,6 @@
     "dll": "arapp dll"
   },
   "author": "Sean",
-  "srcDirs": [
-    "src"
-  ],
   "dllEntry": {
     "polyfill": [
       "@babel/polyfill",
