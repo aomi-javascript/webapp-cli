@@ -1,18 +1,17 @@
 import * as webpack from 'webpack';
-import * as merge from 'webpack-merge';
 
 import { execute as dll } from './dll';
-import common from '../config/webpack.common';
 import prod from '../config/webpack.prod';
-import getUserWebpackConfig from '../utils/getUserWebpackConfig';
+import getWebpackConfig from '../utils/getWebpackConfig';
 
 /**
+ * 执行打包任务
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
  */
 export async function execute() {
   await dll();
-  const finalConfig = merge(common, prod, getUserWebpackConfig('common'), getUserWebpackConfig('prod'));
-  webpack(finalConfig).run((err, stats) => {
+  const config = getWebpackConfig('prod');
+  webpack(config).run((err, stats) => {
     if (err) {
       console.error(err.stack || err);
       if (err.details) {
