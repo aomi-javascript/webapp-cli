@@ -13,7 +13,12 @@ const defaultDevServer = {
   port: 3000
 };
 
-const {devServer = defaultDevServer} = userPkg;
+const {devServer} = userPkg;
+
+const newDevServer = {
+  ...defaultDevServer,
+  ...devServer
+};
 
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
@@ -27,15 +32,15 @@ export function execute() {
     compress: true,
     disableHostCheck: true,
     historyApiFallback: true,
-    host: devServer.host,
-    port: devServer.port,
+    host: newDevServer.host,
+    port: newDevServer.port,
     quiet: false,
     watchOptions: {
       poll: 1000
     },
     proxy: {
       '/api/*': {
-        target: devServer.api,
+        target: newDevServer.api,
         pathRewrite: {'^/api': ''},
         changeOrigin: true
       },
