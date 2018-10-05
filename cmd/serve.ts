@@ -1,7 +1,19 @@
 import * as webpack from 'webpack';
 import * as WebpackDevServer from 'webpack-dev-server';
+import * as path from 'path';
 
 import getWebpackConfig from '../utils/getWebpackConfig';
+
+const appHome = process.cwd();
+const userPkg = require(path.join(appHome, 'package.json'));
+
+const defaultDevServer = {
+  api: 'http://localhost:8080',
+  host: '0.0.0.0',
+  port: 3000
+};
+
+const {devServer = defaultDevServer} = userPkg;
 
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
@@ -9,6 +21,25 @@ import getWebpackConfig from '../utils/getWebpackConfig';
 export function execute() {
   const config = getWebpackConfig('dev');
   const compiler = webpack(config);
-  const server = new WebpackDevServer(compiler);
+  const server = new WebpackDevServer(compiler, {
+    hot: true,
+    contentBase: config.output.path,
+    compress: true,
+    disableHostCheck: true,
+    historyApiFallback: true,
+    host: devServer.host,
+    port: devServer.port,
+    quiet: false,
+    watchOptions: {
+      poll: 1000
+    },
+    proxy: {
+      '/api/*': {
+        target: devServer.api,
+        pathRewrite: {'^/api': ''},
+        changeOrigin: true
+      },
+    }
+  });
   server.listen(config.devServer.port, config.devServer.host);
 }
