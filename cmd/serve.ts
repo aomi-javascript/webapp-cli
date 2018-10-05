@@ -46,5 +46,5 @@ export function execute() {
       },
     }
   });
-  server.listen(config.devServer.port, config.devServer.host);
+  server.listen(newDevServer.port, newDevServer.host);
 }
