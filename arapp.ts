@@ -33,7 +33,9 @@ program
   .description('编译打包应用')
   .action(() => {
     process.env.NODE_ENV = 'production';
-    run('bundle', {});
+    run('dll', {}).then(() => {
+      run('bundle', {});
+    });
   })
 ;
 
@@ -51,7 +53,7 @@ function run(cmd, options) {
   const cmdExecFile = path.join(__dirname, 'cmd', `${cmd}.js`);
   try {
     const handler = require(cmdExecFile);
-    handler.execute(options);
+    return handler.execute(options);
   } catch (e) {
     console.error(e);
     process.exit(1);
