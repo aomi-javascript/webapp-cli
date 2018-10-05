@@ -1,5 +1,7 @@
 import * as merge from 'webpack-merge';
 import common from '../config/webpack.common';
+import devConfig from '../config/webpack.dev';
+import prodConfig from '../config/webpack.prod';
 
 import getUserWebpackConfig from './getUserWebpackConfig';
 import checkLoader from './checkLoader';
@@ -12,7 +14,7 @@ export default function getWebpackConfig(type) {
   checkLoader(common, userCommon);
   return merge(
     common,
-    require(`../config/webpack.${type}`),
+    type === 'prod' ? prodConfig : devConfig,
     userCommon,
     getUserWebpackConfig(type)
   );
