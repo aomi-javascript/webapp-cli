@@ -1,6 +1,5 @@
 import * as webpack from 'webpack';
 
-import { execute as dll } from './dll';
 import prod from '../config/webpack.prod';
 import getWebpackConfig from '../utils/getWebpackConfig';
 
@@ -8,8 +7,7 @@ import getWebpackConfig from '../utils/getWebpackConfig';
  * 执行打包任务
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
  */
-export async function execute() {
-  await dll();
+export function execute() {
   const config = getWebpackConfig('prod');
   webpack(config).run((err, stats) => {
     if (err) {
