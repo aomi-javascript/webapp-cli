@@ -28,6 +28,7 @@ const devDependencies = [
   'node-sass',
   'postcss-loader',
   'sass-loader',
+  'source-map-loader',
   'style-loader',
   'url-loader'
 ];
