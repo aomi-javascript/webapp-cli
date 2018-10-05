@@ -78,8 +78,12 @@ export default {
   ],
   module: {
     rules: [{
-      test: /\.(tsx|ts)$/,
-      use: 'awesome-typescript-loader'
+      test: /\.tsx?$/,
+      enforce: 'pre',
+      use: ['source-map-loader']
+    }, {
+      test: /\.tsx?$/,
+      use: ['awesome-typescript-loader']
     }, {
       test: /\.css$/,
       use: [{
