@@ -7,7 +7,7 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <div>{'Home'}</div>
+      <div>{'Hello. I\'m A React Application.'}</div>
     );
   }
 
