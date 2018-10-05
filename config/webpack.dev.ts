@@ -1,6 +1,10 @@
 import * as webpack from 'webpack';
+import * as path from 'path';
 import common from './webpack.common';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
+const appHome = process.cwd();
+const userPkg = require(path.join(appHome, 'package.json'));
 
 export default {
   mode: 'development',
@@ -16,6 +20,13 @@ export default {
     quiet: false,
     watchOptions: {
       poll: 1000
+    },
+    proxy: {
+      '/api/*': {
+        target: userPkg.api || '',
+        pathRewrite: {'^/api': ''},
+        changeOrigin: true
+      },
     }
   },
   plugins: [
