@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import './styles/index.scss';
 import * as React from 'react';
 import bootstrap from 'veigar/bootstrap';
@@ -18,7 +17,12 @@ const hashHistory = createHashHistory();
 // Build the middleware for intercepting and dispatching navigation actions
 const historyMiddleware = routerMiddleware(hashHistory);
 
-const store = createAppStore({}, {}, [historyMiddleware], reducer => connectRouter(hashHistory)(reducer));
+const store = createAppStore({
+    router: connectRouter(hashHistory)
+  },
+  {},
+  [historyMiddleware]
+);
 
 bootstrap(() => (
   <Provider store={store}>

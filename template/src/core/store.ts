@@ -1,4 +1,4 @@
-import { applyMiddleware, bindActionCreators, combineReducers, compose, createStore, Reducer } from 'redux';
+import { applyMiddleware, bindActionCreators, combineReducers, compose, createStore } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 import * as commonReducers from '../reducers';
@@ -21,7 +21,7 @@ function getPayload(args) {
  * @author Sean(sean.snow@live.com)
  * @date 2016/12/19
  */
-export function create(reducers, epics, middlewares: Array<any>, reducerWrapper?: <S>(reducer: Reducer<S>) => Reducer<S>) {
+export function create(reducers, epics, middlewares: Array<any>) {
   const rootReducers = combineReducers({
     ...commonReducers,
     ...reducers
@@ -50,10 +50,8 @@ export function create(reducers, epics, middlewares: Array<any>, reducerWrapper?
   const rootEpics = combineEpics(...appEpics);
   const epicMiddleware = createEpicMiddleware();
 
-  const newReducer = reducerWrapper ? reducerWrapper(rootReducers) : rootReducers;
-
   data.store = createStore(
-    newReducer,
+    rootReducers,
     compose(
       applyMiddleware(
         ...middlewares,

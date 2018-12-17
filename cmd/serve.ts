@@ -39,11 +39,12 @@ export function execute() {
       poll: 1000
     },
     proxy: {
+      ...devServer.proxy,
       '/api/*': {
         target: newDevServer.api,
         pathRewrite: {'^/api': ''},
         changeOrigin: true
-      },
+      }
     }
   });
   server.listen(newDevServer.port, newDevServer.host);
