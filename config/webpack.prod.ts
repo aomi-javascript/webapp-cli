@@ -1,12 +1,14 @@
 import * as webpack from 'webpack';
 
-import * as UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import * as TerserPlugin from 'terser-webpack-plugin';
 
 export default {
   mode: 'production',
   devtool: false,
   optimization: {
-    minimizer: [new UglifyJSPlugin()]
+    minimizer: [new TerserPlugin({
+      parallel: true
+    })]
   },
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin({
