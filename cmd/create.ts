@@ -20,17 +20,7 @@ const dependencies = [
 ];
 
 const devDependencies = [
-  '@sitb/arapp-cli',
-  'autoprefixer',
-  'awesome-typescript-loader',
-  'css-loader',
-  'file-loader',
-  'node-sass',
-  'postcss-loader',
-  'sass-loader',
-  'source-map-loader',
-  'style-loader',
-  'url-loader'
+  '@sitb/arapp-cli'
 ];
 
 /**

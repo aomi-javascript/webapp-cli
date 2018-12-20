@@ -1,12 +1,12 @@
 {
   "name": "@sitb/arapp-cli",
-  "version": "1.0.0-Aplha.38",
+  "version": "1.0.0-Aplha.39",
   "description": "A React Application",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc && tsc -w",
-    "clean": "rm -rf **/*.js"
+    "clean": "rm -rf config/*.js cmd/*.js utils/*.js *.js"
   },
   "repository": {
     "type": "git",
