@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Basic Options */
     "module": "esnext",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "es2018"
@@ -37,14 +37,6 @@
     /* Module Resolution Options */
     "moduleResolution": "node",
     "baseUrl": "./",
-    "paths": {
-      "react-native": [
-        "../react-native"
-      ],
-      "common/*": [
-        "../common/*"
-      ]
-    },
     //    "rootDirs": [],
     //    "typeRoots": [],
     //    "types": []
