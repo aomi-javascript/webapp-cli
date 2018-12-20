@@ -78,12 +78,14 @@ export default {
   ],
   module: {
     rules: [{
-      test: /\.tsx?$/,
+      test: /\.(tsx?)|(js)$/,
       enforce: 'pre',
       use: ['source-map-loader']
     }, {
-      test: /\.tsx?$/,
-      use: ['awesome-typescript-loader']
+      test: /\.(tsx?)|(js)$/,
+      use: [
+        'babel-loader'
+      ]
     }, {
       test: /\.css$/,
       use: [{
