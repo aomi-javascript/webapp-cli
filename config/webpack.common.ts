@@ -78,9 +78,10 @@ export default {
   ],
   module: {
     rules: [{
-      test: /\.(tsx?)|(js)$/,
+      test: /\.(tsx?|js)$/,
       enforce: 'pre',
-      use: ['source-map-loader']
+      use: ['source-map-loader'],
+      include: srcDirs
     }, {
       test: /\.(tsx?)|(js)$/,
       use: [
