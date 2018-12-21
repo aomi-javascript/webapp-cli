@@ -20,7 +20,7 @@ export function execute() {
         chunks: false,  // Makes the build much quieter
         colors: true    // Shows colors in the console
       }));
-      console.log('bundle dll ok..');
+      console.log('bundle dll ok...');
       resolve();
     });
   });
