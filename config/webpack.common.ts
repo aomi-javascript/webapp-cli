@@ -53,7 +53,8 @@ export default {
       immutable: path.join(moduleDir, 'immutable'),
       classnames: path.join(moduleDir, 'classnames'),
       history: path.join(moduleDir, 'history'),
-      rxjs: path.join(moduleDir, 'rxjs')
+      rxjs: path.join(moduleDir, 'rxjs'),
+      lodash: path.join(moduleDir, 'lodash')
     },
     modules: [
       'node_modules'
