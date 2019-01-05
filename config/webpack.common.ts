@@ -21,7 +21,9 @@ const fontDir = 'fonts';
 
 const moduleDir = path.join(appHome, 'node_modules');
 
-const dll = ['polyfill'];
+const userPkg = require(path.join(appHome, 'package.json'));
+
+const dll = Object.keys(userPkg.dllEntry || {});
 
 const assets = [{
   // Glob to match all of the dll file
