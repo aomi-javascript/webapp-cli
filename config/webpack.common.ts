@@ -50,7 +50,8 @@ export default {
       'react-dom': path.join(moduleDir, 'react-dom'),
       immutable: path.join(moduleDir, 'immutable'),
       classnames: path.join(moduleDir, 'classnames'),
-      history: path.join(moduleDir, 'history')
+      history: path.join(moduleDir, 'history'),
+      rxjs: path.join(moduleDir, 'rxjs')
     },
     modules: [
       'node_modules'
