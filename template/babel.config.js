@@ -7,6 +7,7 @@ module.exports = {
     "@babel/preset-react",
     "@babel/typescript",
     ['minify', {
+      builtIns: false,
       removeConsole: true
     }]
   ],
