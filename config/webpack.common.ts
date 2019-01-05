@@ -91,10 +91,8 @@ export default {
       use: ['source-map-loader'],
       include: srcDirs
     }, {
-      test: /\.(tsx?)|(js)$/,
-      use: [
-        'babel-loader'
-      ]
+      test: DEBUG ? /\.tsx?$/ : /\.(tsx?)|(js)$/,
+      use: [DEBUG ? 'awesome-typescript-loader' : 'babel-loader']
     }, {
       test: /\.css$/,
       use: [{
