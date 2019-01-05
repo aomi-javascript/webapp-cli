@@ -19,6 +19,8 @@ const styleDir = 'stylesheets';
 const imagesDir = 'images';
 const fontDir = 'fonts';
 
+const moduleDir = path.join(appHome, 'node_modules');
+
 const dll = ['polyfill'];
 
 const assets = [{
@@ -43,10 +45,12 @@ export default {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
     alias: {
-      'object-assign': path.resolve(path.join(appHome, 'node_modules', 'object-assign')),
-      react: path.resolve(path.join(appHome, 'node_modules', 'react')),
-      'react-dom': path.resolve(path.join(appHome, 'node_modules', 'react-dom')),
-      immutable: path.resolve(path.join(appHome, 'node_modules', 'immutable'))
+      'object-assign': path.join(moduleDir, 'object-assign'),
+      react: path.join(moduleDir, 'react'),
+      'react-dom': path.join(moduleDir, 'react-dom'),
+      immutable: path.join(moduleDir, 'immutable'),
+      classnames: path.join(moduleDir, 'classnames'),
+      history: path.join(moduleDir, 'history')
     },
     modules: [
       'node_modules'
