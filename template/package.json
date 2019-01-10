@@ -5,17 +5,9 @@
   "description": "",
   "scripts": {
     "start": "arapp serve",
-    "bundle": "arapp bundle",
-    "dll": "arapp dll"
+    "bundle": "arapp bundle"
   },
   "author": "Sean",
-  "dllEntry": {
-    "polyfill": [
-      "@babel/polyfill",
-      "whatwg-fetch",
-      "es6-promise"
-    ]
-  },
   "devServer": {
     "host": "0.0.0.0",
     "port": 3000,
