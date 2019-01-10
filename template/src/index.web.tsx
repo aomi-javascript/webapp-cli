@@ -1,3 +1,6 @@
+import '@babel/polyfill';
+import 'whatwg-fetch';
+import 'es6-promise/auto';
 import './styles/index.scss';
 import * as React from 'react';
 import bootstrap from 'veigar/bootstrap';
