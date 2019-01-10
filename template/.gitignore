@@ -55,3 +55,5 @@ lib
 .#*
 *#
 generated
+
+*.js
