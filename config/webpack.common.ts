@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
@@ -47,6 +47,7 @@ export default {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
     alias: {
+      antd: path.join(moduleDir, 'antd'),
       'object-assign': path.join(moduleDir, 'object-assign'),
       react: path.join(moduleDir, 'react'),
       'react-dom': path.join(moduleDir, 'react-dom'),
@@ -74,10 +75,7 @@ export default {
       filename: `${styleDir}/[name]-[hash].css`,
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
-    new CleanWebpackPlugin([buildDir], {
-      root: appHome
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new CleanWebpackPlugin(),
     new AddAssetHtmlPlugin(assets),
     ...dll.map(dllName => new webpack.DllReferencePlugin({
       context: appHome,
@@ -103,21 +101,23 @@ export default {
           publicPath: '../'
         }
       },
-        'postcss-loader',
-        'css-loader'
+        'style-loader',
+        {loader: 'css-loader', options: {importLoaders: 1}},
+        'postcss-loader'
       ]
     }, {
       test: /\.(sa|sc|c)ss$/,
       use: [
-        DEBUG ? 'style-loader' : {
+        {
           loader: MiniCssExtractPlugin.loader,
           options: {
             publicPath: '../'
           }
         },
-        'css-loader',
+        'style-loader',
+        {loader: 'css-loader', options: {importLoaders: 1}},
         'postcss-loader',
-        'sass-loader',
+        'sass-loader'
       ]
     }, {
       test: /\.gif/,

@@ -9,7 +9,7 @@ import getWebpackConfig from '../utils/getWebpackConfig';
  */
 export function execute() {
   const config = getWebpackConfig('prod');
-  webpack(config).run((err, stats) => {
+  webpack(config).run((err: any, stats) => {
     if (err) {
       console.error(err.stack || err);
       if (err.details) {
