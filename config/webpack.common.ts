@@ -101,9 +101,9 @@ export default {
           publicPath: '../'
         }
       },
-        'style-loader',
-        {loader: 'css-loader', options: {importLoaders: 1}},
-        'postcss-loader'
+        {loader: 'style-loader', options: {sourceMap: DEBUG}},
+        {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
+        {loader: 'postcss-loader', options: {sourceMap: DEBUG}}
       ]
     }, {
       test: /\.(sa|sc|c)ss$/,
@@ -114,10 +114,10 @@ export default {
             publicPath: '../'
           }
         },
-        'style-loader',
-        {loader: 'css-loader', options: {importLoaders: 1}},
-        'postcss-loader',
-        'sass-loader'
+        {loader: 'style-loader', options: {sourceMap: DEBUG}},
+        {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
+        {loader: 'postcss-loader', options: {sourceMap: DEBUG}},
+        {loader: 'sass-loader', options: {sourceMap: DEBUG}}
       ]
     }, {
       test: /\.gif/,
