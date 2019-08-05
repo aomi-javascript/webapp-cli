@@ -29,7 +29,7 @@ const assets = [{
   // Glob to match all of the dll file
   filepath: path.resolve(appHome, 'build/dll/*.dll.js'),
   publicPath: `./${scriptDir}`,
-  outputPath: scriptDir,
+  outputPath: scriptDir
 }];
 
 function getImageLoader(mimetype) {
@@ -73,7 +73,7 @@ export default {
       chunksSortMode: 'none'
     }),
     new MiniCssExtractPlugin({
-      filename: `${styleDir}/[name]-[hash].css`,
+      filename: `${styleDir}/[name]-[hash].css`
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     new CleanWebpackPlugin(),
@@ -104,6 +104,19 @@ export default {
       },
         {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
         {loader: 'postcss-loader', options: {sourceMap: DEBUG}}
+      ]
+    }, {
+      test: /\.less$/,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: '../'
+          }
+        },
+        {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
+        {loader: 'postcss-loader', options: {sourceMap: DEBUG}},
+        {loader: 'less-loader', options: {sourceMap: DEBUG}}
       ]
     }, {
       test: /\.(sa|sc|c)ss$/,
