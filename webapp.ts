@@ -5,6 +5,7 @@
  */
 import * as program from 'commander';
 import * as path from 'path';
+import templates from './template';
 
 const pkg = require('./package.json');
 
@@ -15,8 +16,18 @@ program
 
 program
   .command('create <name>')
-  .description('创建一个React Application')
-  .action((name) => run('create', name))
+  .description(`创建一个Web app.
+
+  模板列表:
+    ${templates.map(({name, describe}) => `${name} - ${describe}`).join('\n    ')}
+
+  样例:
+    arapp create -t react foo
+`)
+  .option('-t, --template', '模板名称', 'react')
+  .action((command, options) => {
+    console.log(command, options.template)
+  })
 ;
 
 program
