@@ -20,7 +20,7 @@
     //    "isolatedModules": true,
 
     /* Strict Type-Checking Options */
-//    "strict": true,
+    //    "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
     //    "strictFunctionTypes": true
