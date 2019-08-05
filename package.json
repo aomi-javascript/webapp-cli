@@ -1,7 +1,7 @@
 {
-  "name": "@sitb/arapp-cli",
-  "version": "1.0.1-Aplha.3",
-  "description": "A React Application",
+  "name": "@aomi/webapp-cli",
+  "version": "1.0.0-Aplha",
+  "description": "a web app cli",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@onegit.app:enterprise/arapp-cli.git"
+    "url": "https://github.com/aomitech/webapp-cli.git"
   },
   "keywords": [
     "React"
@@ -18,14 +18,14 @@
   "author": "Sean",
   "license": "ISC",
   "bin": {
-    "arapp": "./arapp.js"
+    "webapp": "./webapp.js"
   },
   "files": [
     "cmd",
     "config",
     "template",
     "utils",
-    "arapp.js",
+    "webapp.js",
     "package.json",
     "README.md",
     "yarn.lock"
@@ -69,6 +69,7 @@
     "file-loader": "^4.1.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
