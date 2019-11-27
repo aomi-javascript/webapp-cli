@@ -3,20 +3,7 @@ import * as path from 'path';
 import * as spawn from 'cross-spawn';
 
 const dependencies = [
-  '@babel/polyfill',
-  '@sitb/svg-icon',
-  '@sitb/wbs',
-  'connected-react-router',
-  'es6-promise',
-  'react',
-  'react-dom',
-  'react-redux',
-  'react-router-dom',
-  'redux',
-  'redux-observable',
-  'rxjs',
-  'veigar',
-  'whatwg-fetch'
+
 ];
 
 const devDependencies = [
@@ -26,7 +13,7 @@ const devDependencies = [
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/2
  */
-export function execute(appName) {
+export function execute(appName:string[]) {
   if (!appName) {
     console.error(`
 请指定App Name
@@ -38,8 +25,6 @@ arapp create myApp
 
   const appHome = `${process.cwd()}/${appName}`;
 
-  console.log(appHome);
-
   if (fs.pathExistsSync(appHome)) {
     console.error(`${appHome} exists`);
     process.exit(1);
@@ -50,7 +35,7 @@ arapp create myApp
     console.error(`创建应用目录失败: ${e.message}`);
   }
 
-  const templateHome = path.resolve(__dirname, '..', 'template');
+  const templateHome = path.resolve(__dirname, '..', 'index.ts');
   fs.copySync(templateHome, appHome);
   Promise.race([installDependencies(appHome), installDevDependencies(appHome)])
     .then(() => console.log('install success.'))

@@ -99,7 +99,8 @@ export default {
         options: {
           // you can specify a publicPath here
           // by default it use publicPath in webpackOptions.output
-          publicPath: '../'
+          publicPath: '../',
+          hmr: DEBUG
         }
       },
         {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
@@ -111,7 +112,8 @@ export default {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: '../'
+            publicPath: '../',
+            hmr: DEBUG
           }
         },
         {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
@@ -124,7 +126,8 @@ export default {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: '../'
+            publicPath: '../',
+            hmr: DEBUG
           }
         },
         {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},

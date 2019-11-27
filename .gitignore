@@ -37,7 +37,6 @@ node_modules
 lib
 
 
-*.iml
 *.ipr
 *.iws
 *.pbxuser
@@ -57,3 +56,5 @@ lib
 generated
 
 *.js
+!template/*/*.config.js
+!template/*/*.html.js

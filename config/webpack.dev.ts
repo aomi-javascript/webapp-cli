@@ -7,7 +7,6 @@ export default {
   devtool: 'source-map',
   plugins: [
     new BundleAnalyzerPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ]
 };
