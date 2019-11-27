@@ -73,7 +73,8 @@ export default {
       chunksSortMode: 'none'
     }),
     new MiniCssExtractPlugin({
-      filename: `${styleDir}/[name]-[hash].css`
+      filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[hash].css`,
+      chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     new CleanWebpackPlugin(),
@@ -118,7 +119,7 @@ export default {
         },
         {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
         {loader: 'postcss-loader', options: {sourceMap: DEBUG}},
-        {loader: 'less-loader', options: {sourceMap: DEBUG}}
+        {loader: 'less-loader', options: {sourceMap: DEBUG, javascriptEnabled: true}}
       ]
     }, {
       test: /\.(sa|sc|c)ss$/,
