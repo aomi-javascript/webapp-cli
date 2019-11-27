@@ -1,6 +1,8 @@
 import * as webpack from 'webpack';
 
 import * as TerserPlugin from 'terser-webpack-plugin';
+import * as  OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+
 
 export default {
   mode: 'production',
@@ -8,7 +10,7 @@ export default {
   optimization: {
     minimizer: [new TerserPlugin({
       parallel: true
-    })]
+    }), new OptimizeCSSAssetsPlugin({})]
   },
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin({
