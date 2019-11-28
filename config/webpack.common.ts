@@ -38,7 +38,7 @@ function getImageLoader(mimetype) {
 }
 
 const entry: any = {};
-const htmlPlugins = [];
+const plugins = [];
 
 if (userPkg.mulitApp) {
   console.log('多应用程序');
@@ -57,7 +57,7 @@ if (userPkg.mulitApp) {
       template = path.join(appRoot, app, 'index.html');
     }
     console.log(`${app}入口html： ${template}`);
-    htmlPlugins.push(new HtmlWebpackPlugin({
+    plugins.push(new HtmlWebpackPlugin({
       template,
       filename: `${app}.html`,
       debug: DEBUG,
@@ -69,7 +69,7 @@ if (userPkg.mulitApp) {
 } else {
   console.log('单用程序');
   entry.app = path.join(srcDirs, 'index.web.tsx');
-  htmlPlugins.push(new HtmlWebpackPlugin({
+  plugins.push(new HtmlWebpackPlugin({
     template: path.join(srcDirs, 'index.html.js'),
     debug: DEBUG,
     env: process.env,
@@ -82,6 +82,7 @@ export default {
   output: {
     path: buildDir,
     filename: `${scriptDir}/[name]-[hash].bundle.js`,
+    chunkFilename: `${scriptDir}[name]-[hash].chunk.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
@@ -105,7 +106,7 @@ export default {
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
-    ...htmlPlugins,
+    ...plugins,
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[hash].css`,
       chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
