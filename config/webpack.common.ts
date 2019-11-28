@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -36,13 +37,51 @@ function getImageLoader(mimetype) {
   return `url-loader?limit=10000&mimetype=${mimetype}&name=${imagesDir}/[name]-[hash].[ext]`;
 }
 
+const entry: any = {};
+const htmlPlugins = [];
+
+if (userPkg.mulitApp) {
+  console.log('多应用程序');
+  const appRoot = path.join(srcDirs, 'app');
+  const appSrcDirs = fs.readdirSync(appRoot);
+  appSrcDirs.forEach(app => {
+    const entryFile = path.join(appRoot, app, 'index.web.tsx');
+    console.log(`${app}入口JS: ${entryFile}`);
+    entry[app] = entryFile;
+
+    const indexHtmljs = path.join(appRoot, app, 'index.html.js');
+    let template;
+    if (fs.existsSync(indexHtmljs)) {
+      template = indexHtmljs;
+    } else {
+      template = path.join(appRoot, app, 'index.html');
+    }
+    console.log(`${app}入口html： ${template}`);
+    htmlPlugins.push(new HtmlWebpackPlugin({
+      template,
+      filename: `${app}.html`,
+      debug: DEBUG,
+      env: process.env,
+      chunks: [app],
+      chunksSortMode: 'none'
+    }));
+  });
+} else {
+  console.log('单用程序');
+  entry.app = path.join(srcDirs, 'index.web.tsx');
+  htmlPlugins.push(new HtmlWebpackPlugin({
+    template: path.join(srcDirs, 'index.html.js'),
+    debug: DEBUG,
+    env: process.env,
+    chunksSortMode: 'none'
+  }));
+}
+
 export default {
-  entry: {
-    app: path.join(srcDirs, 'index.web.tsx')
-  },
+  entry,
   output: {
     path: buildDir,
-    filename: `${scriptDir}/[name]-[hash].bundle.js`
+    filename: `${scriptDir}/[name]-[hash].bundle.js`,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
@@ -66,12 +105,7 @@ export default {
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(srcDirs, 'index.html.js'),
-      debug: DEBUG,
-      env: process.env,
-      chunksSortMode: 'none'
-    }),
+    ...htmlPlugins,
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[hash].css`,
       chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
