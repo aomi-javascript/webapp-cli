@@ -13,7 +13,7 @@ const defaultDevServer = {
   port: 3000
 };
 
-const {devServer} = userPkg;
+const {devServer = {}} = userPkg;
 
 const newDevServer = {
   ...defaultDevServer,
