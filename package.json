@@ -1,6 +1,6 @@
 {
   "name": "@aomi/webapp-cli",
-  "version": "1.0.0-Aplha.5",
+  "version": "1.0.0-Aplha.6",
   "description": "a web app cli",
   "main": "index.js",
   "scripts": {
