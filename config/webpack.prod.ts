@@ -8,6 +8,9 @@ export default {
   mode: 'production',
   devtool: false,
   optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
     minimizer: [new TerserPlugin({
       parallel: true
     }), new OptimizeCSSAssetsPlugin({})]
