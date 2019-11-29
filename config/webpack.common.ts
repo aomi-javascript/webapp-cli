@@ -62,7 +62,7 @@ if (userPkg.mulitApp) {
       filename: `${app}.html`,
       debug: DEBUG,
       env: process.env,
-      chunks: [app],
+      excludeChunks: appSrcDirs.filter(item => item !== app),
       chunksSortMode: 'none'
     }));
   });
@@ -82,7 +82,7 @@ export default {
   output: {
     path: buildDir,
     filename: `${scriptDir}/[name]-[hash].bundle.js`,
-    chunkFilename: `${scriptDir}[name]-[hash].chunk.js`
+    chunkFilename: `${scriptDir}/[id]-[hash].chunk.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
