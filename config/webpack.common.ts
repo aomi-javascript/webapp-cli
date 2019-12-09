@@ -59,7 +59,7 @@ if (userPkg.mulitApp) {
     console.log(`${app}入口html： ${template}`);
     plugins.push(new HtmlWebpackPlugin({
       template,
-      filename: `${app}/index.html`,
+      filename: `${app}.html`,
       debug: DEBUG,
       env: process.env,
       excludeChunks: appSrcDirs.filter(item => item !== app),
