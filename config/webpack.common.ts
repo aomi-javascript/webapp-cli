@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -77,6 +78,29 @@ if (userPkg.mulitApp) {
   }));
 }
 
+
+const faviconPng = path.join(srcDirs, 'assets', 'images', 'favicon.png');
+const faviconJpg = path.join(srcDirs, 'assets', 'images', 'favicon.jpg');
+const faviconSvg = path.join(srcDirs, 'assets', 'images', 'favicon.svg');
+
+let favicon = null;
+if (fs.existsSync(faviconPng)) {
+  favicon = faviconPng;
+} else if (fs.existsSync(faviconJpg)) {
+  favicon = faviconJpg;
+} else if (fs.existsSync(faviconSvg)) {
+  favicon = faviconSvg;
+}
+if (favicon) {
+  console.log(`发现favicon: ${favicon}`);
+  plugins.push(new FaviconsWebpackPlugin({
+    logo: favicon,
+    outputPath: path.join(imagesDir, 'favicon'),
+    publicPath: 'images',
+    prefix: 'favicon/'
+  }))
+}
+
 export default {
   entry,
   output: {
@@ -107,6 +131,7 @@ export default {
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
     ...plugins,
+
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[hash].css`,
       chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
