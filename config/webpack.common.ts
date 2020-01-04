@@ -98,7 +98,7 @@ if (favicon) {
     outputPath: path.join(imagesDir, 'favicon'),
     publicPath: 'images',
     prefix: 'favicon/'
-  }))
+  }));
 }
 
 export default {
@@ -153,6 +153,16 @@ export default {
     }, {
       test: DEBUG ? /\.tsx?$/ : /\.(tsx?)|(js)$/,
       use: [DEBUG ? 'awesome-typescript-loader' : 'babel-loader']
+    }, {
+      test: /\.md$/,
+      use: [{
+        loader: 'html-loader'
+      }, {
+        loader: 'markdown-loader',
+        options: {
+          ...(userPkg.markedOptions || {})
+        }
+      }]
     }, {
       test: /\.css$/,
       use: [{
