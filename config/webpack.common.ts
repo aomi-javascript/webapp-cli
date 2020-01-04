@@ -36,7 +36,7 @@ const assets = [{
 }];
 
 function getImageLoader(mimetype) {
-  return `url-loader?limit=10000&mimetype=${mimetype}&name=${imagesDir}/[name]-[hash].[ext]`;
+  return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[hash].[ext]`;
 }
 
 const entry: any = {};
@@ -154,6 +154,11 @@ export default {
     }, {
       test: DEBUG ? /\.tsx?$/ : /\.(tsx?)|(js)$/,
       use: [DEBUG ? 'awesome-typescript-loader' : 'babel-loader']
+    }, {
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader'
+      }]
     }, {
       test: /\.md$/,
       use: [{
