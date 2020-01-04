@@ -2,10 +2,11 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const {NODE_ENV = 'development'} = process.env;
 
