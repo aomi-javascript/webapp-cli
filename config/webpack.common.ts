@@ -65,7 +65,7 @@ if (userPkg.mulitApp) {
       debug: DEBUG,
       env: process.env,
       excludeChunks: appSrcDirs.filter(item => item !== app),
-      chunksSortMode: 'manual'
+      chunksSortMode: 'none'
     }));
   });
 } else {
