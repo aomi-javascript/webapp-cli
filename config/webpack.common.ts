@@ -65,7 +65,7 @@ if (userPkg.mulitApp) {
       debug: DEBUG,
       env: process.env,
       excludeChunks: appSrcDirs.filter(item => item !== app),
-      chunksSortMode: 'none'
+      chunksSortMode: 'manual'
     }));
   });
 } else {
@@ -74,8 +74,7 @@ if (userPkg.mulitApp) {
   plugins.push(new HtmlWebpackPlugin({
     template: path.join(srcDirs, 'index.html.js'),
     debug: DEBUG,
-    env: process.env,
-    chunksSortMode: 'none'
+    env: process.env
   }));
 }
 
