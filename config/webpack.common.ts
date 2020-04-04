@@ -168,6 +168,7 @@ export default {
       }]
     }, {
       test: /\.css$/,
+      exclude: /\.module\.css$/i,
       use: [{
         loader: MiniCssExtractPlugin.loader,
         options: {
@@ -197,6 +198,7 @@ export default {
       ]
     }, {
       test: /\.less$/,
+      exclude: /\.module\.less$/i,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
@@ -225,7 +227,8 @@ export default {
         {loader: 'less-loader', options: {sourceMap: DEBUG, javascriptEnabled: true}}
       ]
     }, {
-      test: /\.(sa|sc|c)ss$/,
+      test: /\.(sa|sc)ss$/,
+      exclude: /\.module\.(sa|sc)ss$/i,
       use: [
         {
           loader: MiniCssExtractPlugin.loader,
