@@ -64,8 +64,7 @@ if (userPkg.mulitApp) {
       filename: `${app}.html`,
       debug: DEBUG,
       env: process.env,
-      excludeChunks: appSrcDirs.filter(item => item !== app),
-      chunksSortMode: 'none'
+      excludeChunks: appSrcDirs.filter(item => item !== app)
     }));
   });
 } else {
@@ -131,7 +130,6 @@ export default {
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
     ...plugins,
-
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[hash].css`,
       chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
@@ -183,6 +181,21 @@ export default {
         {loader: 'postcss-loader', options: {sourceMap: DEBUG}}
       ]
     }, {
+      // For CSS modules
+      test: /\.module\.css$/i,
+      use: [{
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          // you can specify a publicPath here
+          // by default it use publicPath in webpackOptions.output
+          publicPath: '../',
+          hmr: DEBUG
+        }
+      },
+        {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1, modules: true}},
+        {loader: 'postcss-loader', options: {sourceMap: DEBUG}}
+      ]
+    }, {
       test: /\.less$/,
       use: [
         {
@@ -197,6 +210,21 @@ export default {
         {loader: 'less-loader', options: {sourceMap: DEBUG, javascriptEnabled: true}}
       ]
     }, {
+      // For CSS modules
+      test: /\.module\.less$/i,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: '../',
+            hmr: DEBUG
+          }
+        },
+        {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1, modules: true}},
+        {loader: 'postcss-loader', options: {sourceMap: DEBUG}},
+        {loader: 'less-loader', options: {sourceMap: DEBUG, javascriptEnabled: true}}
+      ]
+    }, {
       test: /\.(sa|sc|c)ss$/,
       use: [
         {
@@ -207,6 +235,20 @@ export default {
           }
         },
         {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1}},
+        {loader: 'postcss-loader', options: {sourceMap: DEBUG}},
+        {loader: 'sass-loader', options: {sourceMap: DEBUG}}
+      ]
+    }, {
+      test: /\.module\.(sa|sc|c)ss$/i,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: '../',
+            hmr: DEBUG
+          }
+        },
+        {loader: 'css-loader', options: {sourceMap: DEBUG, importLoaders: 1, modules: true}},
         {loader: 'postcss-loader', options: {sourceMap: DEBUG}},
         {loader: 'sass-loader', options: {sourceMap: DEBUG}}
       ]
