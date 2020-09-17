@@ -268,7 +268,7 @@ export default {
       test: /\.svg/,
       use: getImageLoader('image/svg+xml')
     }, {
-      test: /\.(woff|eot|ttf)/,
+      test: /\.(woff|eot|ttf|xls|xlsx|doc|docx)/,
       use: [`file-loader?name=${fontDir}/[name]-[hash].[ext]`]
     }]
   }
