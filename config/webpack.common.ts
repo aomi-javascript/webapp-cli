@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
+// import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -27,12 +27,12 @@ const userPkg = require(path.join(appHome, 'package.json'));
 
 const dll = Object.keys(userPkg.dllEntry || {});
 
-const assets = [ {
+const assets = [{
   // Glob to match all of the dll file
   filepath: path.resolve(appHome, 'build/dll/*.dll.js'),
   publicPath: `./${scriptDir}`,
   outputPath: scriptDir
-} ];
+}];
 
 function getImageLoader(mimetype) {
   return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[hash].[ext]`;
@@ -107,7 +107,7 @@ export default {
     chunkFilename: `${scriptDir}/[id]-[hash].chunk.js`
   },
   resolve: {
-    extensions: [ '.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg' ],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
     alias: {
       antd: path.join(moduleDir, 'antd'),
       'object-assign': path.join(moduleDir, 'object-assign'),
@@ -134,40 +134,40 @@ export default {
       chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
-    new AddAssetHtmlPlugin(assets),
+    // new AddAssetHtmlPlugin(assets),
     ...dll.map(dllName => new webpack.DllReferencePlugin({
       context: appHome,
       manifest: require(`${appHome}/build/dll/${dllName}.manifest.json`)
     }))
   ],
   module: {
-    rules: [ {
+    rules: [{
       test: /\.(tsx?|js)$/,
       enforce: 'pre',
-      use: [ 'source-map-loader' ],
+      use: ['source-map-loader'],
       include: srcDirs
     }, {
       test: DEBUG ? /\.tsx?$/ : /\.(tsx?)|(js)$/,
-      use: [ DEBUG ? 'awesome-typescript-loader' : 'babel-loader' ]
+      use: [DEBUG ? 'awesome-typescript-loader' : 'babel-loader']
     }, {
       test: /\.html$/,
-      use: [ {
+      use: [{
         loader: 'html-loader'
-      } ]
+      }]
     }, {
       test: /\.md$/,
-      use: [ {
+      use: [{
         loader: 'html-loader'
       }, {
         loader: 'markdown-loader',
         options: {
           ...(userPkg.markedOptions || {})
         }
-      } ]
+      }]
     }, {
       test: /\.css$/,
       exclude: /\.module\.css$/i,
-      use: [ {
+      use: [{
         loader: MiniCssExtractPlugin.loader,
         options: {
           // you can specify a publicPath here
@@ -177,12 +177,20 @@ export default {
         }
       },
         { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1 } },
-        { loader: 'postcss-loader', options: { sourceMap: DEBUG } }
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: DEBUG, postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
+          }
+        }
       ]
     }, {
       // For CSS modules
       test: /\.module\.css$/i,
-      use: [ {
+      use: [{
         loader: MiniCssExtractPlugin.loader,
         options: {
           // you can specify a publicPath here
@@ -192,7 +200,15 @@ export default {
         }
       },
         { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1, modules: true } },
-        { loader: 'postcss-loader', options: { sourceMap: DEBUG } }
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: DEBUG, postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
+          }
+        }
       ]
     }, {
       test: /\.less$/,
@@ -206,7 +222,15 @@ export default {
           }
         },
         { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1 } },
-        { loader: 'postcss-loader', options: { sourceMap: DEBUG } },
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: DEBUG, postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
+          }
+        },
         { loader: 'less-loader', options: { sourceMap: DEBUG, javascriptEnabled: true } }
       ]
     }, {
@@ -221,8 +245,15 @@ export default {
           }
         },
         { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1, modules: true } },
-        { loader: 'postcss-loader', options: { sourceMap: DEBUG } },
-        { loader: 'less-loader', options: { sourceMap: DEBUG, javascriptEnabled: true } }
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: DEBUG, postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
+          }
+        }, { loader: 'less-loader', options: { sourceMap: DEBUG, javascriptEnabled: true } }
       ]
     }, {
       test: /\.(sa|sc)ss$/,
@@ -236,7 +267,15 @@ export default {
           }
         },
         { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1 } },
-        { loader: 'postcss-loader', options: { sourceMap: DEBUG } },
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: DEBUG, postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
+          }
+        },
         { loader: 'sass-loader', options: { sourceMap: DEBUG } }
       ]
     }, {
@@ -250,7 +289,15 @@ export default {
           }
         },
         { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1, modules: true } },
-        { loader: 'postcss-loader', options: { sourceMap: DEBUG } },
+        {
+          loader: 'postcss-loader', options: {
+            sourceMap: DEBUG, postcssOptions: {
+              plugins: [
+                'postcss-preset-env'
+              ]
+            }
+          }
+        },
         { loader: 'sass-loader', options: { sourceMap: DEBUG } }
       ]
     }, {
@@ -267,7 +314,7 @@ export default {
       use: getImageLoader('image/svg+xml')
     }, {
       test: /\.(woff|eot|ttf|xls|xlsx|doc|docx)/,
-      use: [ `file-loader?name=${fontDir}/[name]-[hash].[ext]` ]
-    } ]
+      use: [`file-loader?name=${fontDir}/[name]-[hash].[ext]`]
+    }]
   }
 };
