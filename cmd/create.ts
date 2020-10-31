@@ -7,7 +7,7 @@ const dependencies = [
 ];
 
 const devDependencies = [
-  '@sitb/arapp-cli'
+  '@aomi/webapp-cli'
 ];
 
 /**
@@ -17,7 +17,7 @@ export function execute(appName:string[]) {
   if (!appName) {
     console.error(`
 请指定App Name
-arapp create myApp
+webapp create myApp
         `);
     process.exit(1);
   }
