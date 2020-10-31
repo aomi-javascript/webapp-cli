@@ -1,5 +1,5 @@
 import * as webpack from 'webpack';
-import * as merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import * as path from 'path';
 
 import common from '../config/webpack.dll';

@@ -1,8 +1,8 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+// import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-const {NODE_ENV = 'development'} = process.env;
+const { NODE_ENV = 'development' } = process.env;
 
 const appHome = process.cwd();
 const buildDir = path.join(appHome, 'build', 'dll');
@@ -20,7 +20,7 @@ export default {
   mode: NODE_ENV,
   devtool: NODE_ENV === 'production' ? false : 'source-map',
   plugins: [
-    new CleanWebpackPlugin(),
+    //new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),

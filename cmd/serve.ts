@@ -24,7 +24,7 @@ const newDevServer = {
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
  */
 export function execute() {
-  const config = getWebpackConfig('dev');
+  const config: any = getWebpackConfig('dev');
   const compiler = webpack(config);
   const server = new WebpackDevServer(compiler, {
     hot: true,

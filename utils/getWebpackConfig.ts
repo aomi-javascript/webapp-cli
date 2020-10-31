@@ -1,4 +1,4 @@
-import * as merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import common from '../config/webpack.common';
 import devConfig from '../config/webpack.dev';
 import prodConfig from '../config/webpack.prod';
