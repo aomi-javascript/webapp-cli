@@ -13,7 +13,7 @@ const defaultDevServer = {
   port: 3000
 };
 
-const {devServer = {}} = userPkg;
+const { devServer = {} } = userPkg;
 
 const newDevServer = {
   ...defaultDevServer,
@@ -36,13 +36,15 @@ export function execute() {
     port: newDevServer.port,
     quiet: false,
     watchOptions: {
-      poll: 1000
+      ignored: [ 'node_modules' ],
+      aggregateTimeout: 300,
+      poll: 1500
     },
     proxy: {
       ...devServer.proxy,
       '/api/*': {
         target: newDevServer.api,
-        pathRewrite: {'^/api': ''},
+        pathRewrite: { '^/api': '' },
         changeOrigin: true
       }
     }
