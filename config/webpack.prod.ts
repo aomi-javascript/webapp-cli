@@ -8,6 +8,7 @@ export default {
   mode: 'production',
   devtool: false,
   optimization: {
+    chunkIds: 'named',
     splitChunks: {
       chunks: 'all'
     },
