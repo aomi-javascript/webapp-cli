@@ -2,9 +2,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as spawn from 'cross-spawn';
 
-const dependencies = [
-
-];
+const dependencies = [];
 
 const devDependencies = [
   '@aomi/webapp-cli'
@@ -13,7 +11,7 @@ const devDependencies = [
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/2
  */
-export function execute(appName:string[]) {
+export function execute(appName: string[]) {
   if (!appName) {
     console.error(`
 请指定App Name
@@ -44,11 +42,11 @@ webapp create myApp
 
 
 function installDependencies(root) {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     let command = 'yarn';
     let args = ['add', ...dependencies];
     args.push('--cwd', root);
-    const child = spawn(command, args, {stdio: 'inherit'});
+    const child = spawn(command, args, { stdio: 'inherit' });
     child.on('close', code => {
       if (code !== 0) {
         reject({
@@ -65,7 +63,7 @@ function installDevDependencies(root) {
   let command = 'yarn';
   let args = ['add', '--dev', ...devDependencies];
   args.push('--cwd', root);
-  const child = spawn(command, args, {stdio: 'inherit'});
+  const child = spawn(command, args, { stdio: 'inherit' });
   child.on('close', code => {
     if (code !== 0) {
       console.error(`exec ${command} ${args.join(' ')} error`);
