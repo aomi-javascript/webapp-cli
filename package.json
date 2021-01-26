@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc && tsc -w",
-    "clean": "rm -rf config/*.js cmd/*.js utils/*.js *.js"
+    "clean": "rm -rf config/*.js cmd/*.js utils/*.js *.js",
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
