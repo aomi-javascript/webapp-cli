@@ -172,21 +172,24 @@ export default {
         options: {
           // you can specify a publicPath here
           // by default it use publicPath in webpackOptions.output
-          publicPath: '../',
-          hmr: DEBUG
+          publicPath: '../'
         }
-      },
-        { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1 } },
-        {
-          loader: 'postcss-loader', options: {
-            sourceMap: DEBUG, postcssOptions: {
-              plugins: [
-                'postcss-preset-env'
-              ]
-            }
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: DEBUG,
+          importLoaders: 1
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: DEBUG, postcssOptions: {
+            plugins: [
+              'postcss-preset-env'
+            ]
           }
         }
-      ]
+      }]
     }, {
       // For CSS modules
       test: /\.module\.css$/i,
@@ -195,66 +198,93 @@ export default {
         options: {
           // you can specify a publicPath here
           // by default it use publicPath in webpackOptions.output
-          publicPath: '../',
-          hmr: DEBUG
+          publicPath: '../'
         }
-      },
-        { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1, modules: true } },
-        {
-          loader: 'postcss-loader', options: {
-            sourceMap: DEBUG, postcssOptions: {
-              plugins: [
-                'postcss-preset-env'
-              ]
-            }
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: DEBUG,
+          importLoaders: 1,
+          modules: true
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: DEBUG,
+          postcssOptions: {
+            plugins: [
+              'postcss-preset-env'
+            ]
           }
         }
-      ]
+      }]
     }, {
       test: /\.less$/,
       exclude: /\.module\.less$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            publicPath: '../',
-            hmr: DEBUG
+      use: [{
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: '../'
+        }
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: DEBUG,
+          importLoaders: 1
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: DEBUG,
+          postcssOptions: {
+            plugins: [
+              'postcss-preset-env'
+            ]
           }
-        },
-        { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1 } },
-        {
-          loader: 'postcss-loader', options: {
-            sourceMap: DEBUG, postcssOptions: {
-              plugins: [
-                'postcss-preset-env'
-              ]
-            }
+        }
+      }, {
+        loader: 'less-loader',
+        options: {
+          sourceMap: DEBUG,
+          lessOptions: {
+            javascriptEnabled: true
           }
-        },
-        { loader: 'less-loader', options: { sourceMap: DEBUG, javascriptEnabled: true } }
-      ]
+        }
+      }]
     }, {
       // For CSS modules
       test: /\.module\.less$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            publicPath: '../',
-            hmr: DEBUG
+      use: [{
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: '../'
+        }
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: DEBUG,
+          importLoaders: 1,
+          modules: true
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: DEBUG,
+          postcssOptions: {
+            plugins: [
+              'postcss-preset-env'
+            ]
           }
-        },
-        { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1, modules: true } },
-        {
-          loader: 'postcss-loader', options: {
-            sourceMap: DEBUG, postcssOptions: {
-              plugins: [
-                'postcss-preset-env'
-              ]
-            }
+        }
+      }, {
+        loader: 'less-loader',
+        options: {
+          sourceMap: DEBUG,
+          lessOptions: {
+            javascriptEnabled: true
           }
-        }, { loader: 'less-loader', options: { sourceMap: DEBUG, javascriptEnabled: true } }
-      ]
+        }
+      }]
     }, {
       test: /\.(sa|sc)ss$/,
       exclude: /\.module\.(sa|sc)ss$/i,
@@ -262,44 +292,55 @@ export default {
         {
           loader: MiniCssExtractPlugin.loader,
           options: {
-            publicPath: '../',
-            hmr: DEBUG
+            publicPath: '../'
           }
-        },
-        { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1 } },
-        {
-          loader: 'postcss-loader', options: {
+        }, {
+          loader: 'css-loader',
+          options: {
+            sourceMap: DEBUG,
+            importLoaders: 1
+          }
+        }, {
+          loader: 'postcss-loader',
+          options: {
             sourceMap: DEBUG, postcssOptions: {
               plugins: [
                 'postcss-preset-env'
               ]
             }
           }
-        },
-        { loader: 'sass-loader', options: { sourceMap: DEBUG } }
+        }, {
+          loader: 'sass-loader',
+          options: { sourceMap: DEBUG }
+        }
       ]
     }, {
       test: /\.module\.(sa|sc|c)ss$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            publicPath: '../',
-            hmr: DEBUG
+      use: [{
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: '../'
+        }
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: DEBUG,
+          importLoaders: 1,
+          modules: true
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: DEBUG, postcssOptions: {
+            plugins: [
+              'postcss-preset-env'
+            ]
           }
-        },
-        { loader: 'css-loader', options: { sourceMap: DEBUG, importLoaders: 1, modules: true } },
-        {
-          loader: 'postcss-loader', options: {
-            sourceMap: DEBUG, postcssOptions: {
-              plugins: [
-                'postcss-preset-env'
-              ]
-            }
-          }
-        },
-        { loader: 'sass-loader', options: { sourceMap: DEBUG } }
-      ]
+        }
+      }, {
+        loader: 'sass-loader',
+        options: { sourceMap: DEBUG }
+      }]
     }, {
       test: /\.gif/,
       use: getImageLoader('image/gif')
