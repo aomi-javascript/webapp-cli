@@ -36,7 +36,7 @@ const assets = [{
 }];
 
 function getImageLoader(mimetype) {
-  return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[hash].[ext]`;
+  return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[fullhash].[ext]`;
 }
 
 const entry: any = {};
@@ -104,8 +104,8 @@ export default {
   entry,
   output: {
     path: buildDir,
-    filename: `${scriptDir}/[name]-[hash].bundle.js`,
-    chunkFilename: `${scriptDir}/[id]-[hash].chunk.js`
+    filename: `${scriptDir}/[name]-[fullhash].bundle.js`,
+    chunkFilename: `${scriptDir}/[id]-[fullhash].chunk.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
@@ -131,8 +131,8 @@ export default {
     }),
     ...plugins,
     new MiniCssExtractPlugin({
-      filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[hash].css`,
-      chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[hash].css`
+      filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[fullhash].css`,
+      chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[fullhash].css`
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     // new AddAssetHtmlPlugin(assets),
@@ -356,7 +356,7 @@ export default {
       use: getImageLoader('image/svg+xml')
     }, {
       test: /\.(woff|eot|ttf|xls|xlsx|doc|docx)/,
-      use: [`file-loader?name=${fontDir}/[name]-[hash].[ext]`]
+      use: [`file-loader?name=${fontDir}/[name]-[fullhash].[ext]`]
     }]
   }
 };
