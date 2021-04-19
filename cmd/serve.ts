@@ -14,7 +14,9 @@ export function execute() {
   const configWrapper = smp.wrap(config);
   const compiler = webpack(configWrapper);
 
-  const { devServer = {} }: any = getWebappConfig();
+  const { devServer: userDevUser = {} }: any = getWebappConfig();
+
+  const { api, ...devServer } = userDevUser;
 
   const serverConfig = {
     hot: true,
@@ -32,7 +34,7 @@ export function execute() {
     },
     proxy: {
       '/api/*': {
-        target: devServer.api || 'http://localhost:8080',
+        target: api || 'http://localhost:8080',
         pathRewrite: { '^/api': '' },
         changeOrigin: true
       }

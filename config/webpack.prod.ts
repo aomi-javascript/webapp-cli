@@ -1,7 +1,7 @@
 import * as webpack from 'webpack';
 
 import * as TerserPlugin from 'terser-webpack-plugin';
-import * as  OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 
 export default {
@@ -12,9 +12,10 @@ export default {
     splitChunks: {
       chunks: 'all'
     },
+    minimize: true,
     minimizer: [new TerserPlugin({
       parallel: true
-    }), new OptimizeCSSAssetsPlugin({})]
+    }), new CssMinimizerPlugin()]
   },
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin({
