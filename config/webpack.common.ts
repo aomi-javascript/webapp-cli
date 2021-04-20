@@ -168,7 +168,7 @@ export default {
     }, {
       test: /\.css$/,
       exclude: /\.module\.css$/i,
-      use: [{
+      use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
         options: {
           // you can specify a publicPath here
@@ -194,7 +194,7 @@ export default {
     }, {
       // For CSS modules
       test: /\.module\.css$/i,
-      use: [{
+      use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
         options: {
           // you can specify a publicPath here
@@ -220,9 +220,10 @@ export default {
         }
       }]
     }, {
+      // For CSS modules
       test: /\.less$/,
       exclude: /\.module\.less$/i,
-      use: [{
+      use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
         options: {
           publicPath: '../'
@@ -255,7 +256,7 @@ export default {
     }, {
       // For CSS modules
       test: /\.module\.less$/i,
-      use: [{
+      use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
         options: {
           publicPath: '../'
@@ -289,35 +290,33 @@ export default {
     }, {
       test: /\.(sa|sc)ss$/,
       exclude: /\.module\.(sa|sc)ss$/i,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader,
-          options: {
-            publicPath: '../'
-          }
-        }, {
-          loader: 'css-loader',
-          options: {
-            sourceMap: DEBUG,
-            importLoaders: 1
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: DEBUG, postcssOptions: {
-              plugins: [
-                'postcss-preset-env'
-              ]
-            }
-          }
-        }, {
-          loader: 'sass-loader',
-          options: { sourceMap: DEBUG }
+      use: [DEBUG ? 'style-loader' : {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          publicPath: '../'
         }
-      ]
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: DEBUG,
+          importLoaders: 1
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: DEBUG, postcssOptions: {
+            plugins: [
+              'postcss-preset-env'
+            ]
+          }
+        }
+      }, {
+        loader: 'sass-loader',
+        options: { sourceMap: DEBUG }
+      }]
     }, {
       test: /\.module\.(sa|sc|c)ss$/i,
-      use: [{
+      use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
         options: {
           publicPath: '../'
