@@ -4,7 +4,7 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 // import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { getWebappConfig } from '../utils/getWebappConfig';
+import { getWebappConfig, WebappConfig } from '../utils/getWebappConfig';
 
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
@@ -24,7 +24,7 @@ const fontDir = 'fonts';
 
 const moduleDir = path.join(appHome, 'node_modules');
 
-const userPkg: any = getWebappConfig();
+const userPkg: WebappConfig = getWebappConfig();
 
 const dll = Object.keys(userPkg.dllEntry || {});
 
