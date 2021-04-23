@@ -36,7 +36,7 @@ const assets = [{
 }];
 
 function getImageLoader(mimetype) {
-  return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[fullhash].[ext]`;
+  return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[hash].[ext]`;
 }
 
 const entry: any = {};
@@ -104,8 +104,8 @@ export default {
   entry,
   output: {
     path: buildDir,
-    filename: `${scriptDir}/[name]-[fullhash].bundle.js`,
-    chunkFilename: `${scriptDir}/[id]-[fullhash].chunk.js`
+    filename: DEBUG ? `${scriptDir}/[name].bundle.js` : `${scriptDir}/[name]-[contenthash].bundle.js`,
+    chunkFilename: DEBUG ? `${scriptDir}/[id].chunk.js` : `${scriptDir}/[id]-[fullhash].chunk.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
@@ -118,7 +118,8 @@ export default {
       classnames: path.join(moduleDir, 'classnames'),
       history: path.join(moduleDir, 'history'),
       rxjs: path.join(moduleDir, 'rxjs'),
-      lodash: path.join(moduleDir, 'lodash')
+      lodash: path.join(moduleDir, 'lodash'),
+      '@': srcDirs
     },
     modules: [
       'node_modules'
@@ -355,7 +356,7 @@ export default {
       use: getImageLoader('image/svg+xml')
     }, {
       test: /\.(woff|eot|ttf|xls|xlsx|doc|docx)/,
-      use: [`file-loader?name=${fontDir}/[name]-[fullhash].[ext]`]
+      use: [`file-loader?name=${fontDir}/[name]-[hash].[ext]`]
     }]
   }
 };
