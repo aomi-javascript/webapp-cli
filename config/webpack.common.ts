@@ -110,15 +110,6 @@ export default {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
     alias: {
-      antd: path.join(moduleDir, 'antd'),
-      'object-assign': path.join(moduleDir, 'object-assign'),
-      react: path.join(moduleDir, 'react'),
-      'react-dom': path.join(moduleDir, 'react-dom'),
-      immutable: path.join(moduleDir, 'immutable'),
-      classnames: path.join(moduleDir, 'classnames'),
-      history: path.join(moduleDir, 'history'),
-      rxjs: path.join(moduleDir, 'rxjs'),
-      lodash: path.join(moduleDir, 'lodash'),
       '@': srcDirs
     },
     modules: [
