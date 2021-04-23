@@ -12,7 +12,6 @@ export function execute() {
   const config: any = getWebpackConfig('dev');
   const smp = new SpeedMeasurePlugin();
   const configWrapper = smp.wrap(config);
-  const compiler = webpack(configWrapper);
 
   const { devServer: userDevUser = {} }: any = getWebappConfig();
 
@@ -39,8 +38,16 @@ export function execute() {
         changeOrigin: true
       }
     },
+    open: true,
     ...devServer
   };
+
+  WebpackDevServer.addDevServerEntrypoints(configWrapper, serverConfig);
+
+  const compiler = webpack(configWrapper);
+
   const server = new WebpackDevServer(compiler, serverConfig);
-  server.listen(serverConfig.port, serverConfig.host);
+  server.listen(serverConfig.port, serverConfig.host, () => {
+    console.log(`dev server listening on ${serverConfig.host}:${serverConfig.port}`);
+  });
 }
