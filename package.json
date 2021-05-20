@@ -1,6 +1,6 @@
 {
   "name": "@aomi/webapp-cli",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "a web app cli",
   "main": "index.js",
   "scripts": {
@@ -60,7 +60,6 @@
     "@types/react-dom": "^17.0.5",
     "add-asset-html-webpack-plugin": "^3.2.0",
     "autoprefixer": "^10.2.5",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.2.2",
     "babel-preset-minify": "^0.5.1",
     "commander": "^7.2.0",
