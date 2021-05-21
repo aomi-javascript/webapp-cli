@@ -12,6 +12,7 @@ const { NODE_ENV = 'development' } = process.env;
 
 console.log(`NODE_ENV=${NODE_ENV}`);
 const DEBUG = NODE_ENV !== 'production';
+const PROD = NODE_ENV === 'production';
 
 const appHome = process.cwd();
 console.log(`APP_HOME=${appHome}`);
@@ -135,13 +136,9 @@ export default {
   ],
   module: {
     rules: [{
-      test: /\.(tsx?|js)$/,
-      enforce: 'pre',
-      use: ['source-map-loader'],
-      include: srcDirs
-    }, {
-      test: DEBUG ? /\.tsx?$/ : /\.(tsx?)|(js)$/,
-      use: [DEBUG ? 'awesome-typescript-loader' : 'babel-loader']
+      test: /\.(js|mjs|jsx|ts|tsx)$/,
+      include: srcDirs,
+      use: ['babel-loader']
     }, {
       test: /\.html$/,
       use: [{

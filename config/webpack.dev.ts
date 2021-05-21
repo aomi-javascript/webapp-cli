@@ -16,6 +16,6 @@ plugins.push(new webpack.HotModuleReplacementPlugin());
 
 export default {
   mode: 'development',
-  devtool: userPkg.devtool || 'source-map',
+  devtool: userPkg.devtool || 'cheap-module-source-map',
   plugins
 };
