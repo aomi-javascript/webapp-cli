@@ -1,6 +1,6 @@
 {
   "name": "@aomi/webapp-cli",
-  "version": "1.1.19",
+  "version": "1.1.20",
   "description": "a web app cli",
   "main": "index.js",
   "scripts": {
@@ -84,6 +84,7 @@
     "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.2",
+    "thread-loader": "^3.0.4",
     "typescript": "^4.2.4",
     "url-loader": "^4.1.1",
     "webpack": "^5.37.0",
