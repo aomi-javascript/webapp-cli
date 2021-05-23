@@ -121,7 +121,7 @@ export default {
   resolveLoader: {
     modules: ['node_modules']
   },
-  context: appHome,
+  context: srcDirs,
   optimization: {
     splitChunks: {
       cacheGroups: {
