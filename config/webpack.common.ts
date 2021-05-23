@@ -23,7 +23,7 @@ const styleDir = 'stylesheets';
 const imagesDir = 'images';
 const fontDir = 'fonts';
 
-const moduleDir = path.join(appHome, 'node_modules');
+const nodeModuleDir = path.join(appHome, 'node_modules');
 
 const userPkg: WebappConfig = getWebappConfig();
 
@@ -106,7 +106,7 @@ export default {
   output: {
     path: buildDir,
     filename: DEBUG ? `${scriptDir}/[name].bundle.js` : `${scriptDir}/[name]-[contenthash].bundle.js`,
-    chunkFilename: DEBUG ? `${scriptDir}/[id].chunk.js` : `${scriptDir}/[id]-[fullhash].chunk.js`
+    chunkFilename: DEBUG ? `${scriptDir}/[name].chunk.js` : `${scriptDir}/[name]-[contenthash].chunk.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
@@ -114,10 +114,31 @@ export default {
       '@': srcDirs
     },
     modules: [
-      'node_modules'
+      'node_modules',
+      nodeModuleDir
     ]
   },
+  resolveLoader: {
+    modules: ['node_modules']
+  },
   context: appHome,
+  optimization: {
+    cacheGroups: {
+      vendors: {
+        name: `chunk-vendors`,
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+        chunks: 'initial'
+      },
+      common: {
+        name: `chunk-common`,
+        minChunks: 2,
+        priority: -20,
+        chunks: 'initial',
+        reuseExistingChunk: true
+      }
+    }
+  },
   plugins: [
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
@@ -138,7 +159,7 @@ export default {
     rules: [{
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: srcDirs,
-      use: ['babel-loader']
+      use: ['thread-loader', 'babel-loader']
     }, {
       test: /\.html$/,
       use: [{
