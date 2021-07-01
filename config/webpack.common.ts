@@ -4,7 +4,9 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 // import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ESLintWebpackPlugin from 'eslint-webpack-plugin';
+
+const ESLintPlugin = require('eslint-webpack-plugin');
+
 
 import { getWebappConfig, WebappConfig } from '../utils/getWebappConfig';
 
@@ -141,7 +143,11 @@ export default {
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
-    new ESLintWebpackPlugin(),
+    new ESLintPlugin({
+      extensions: ['ts', 'tsx'],
+      fix: true,
+      threads: true
+    }),
     ...plugins,
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[fullhash].css`,
