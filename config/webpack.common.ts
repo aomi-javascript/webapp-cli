@@ -155,6 +155,10 @@ export default {
     rules: [{
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: srcDirs,
+      use: [{ loader: 'eslint-loader' }]
+    }, {
+      test: /\.(js|mjs|jsx|ts|tsx)$/,
+      include: srcDirs,
       use: ['thread-loader', 'babel-loader']
     }, {
       test: /\.html$/,
