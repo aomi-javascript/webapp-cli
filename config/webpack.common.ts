@@ -4,6 +4,8 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 // import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ESLintWebpackPlugin from 'eslint-webpack-plugin';
+
 import { getWebappConfig, WebappConfig } from '../utils/getWebappConfig';
 
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -139,6 +141,7 @@ export default {
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
+    new ESLintWebpackPlugin(),
     ...plugins,
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[fullhash].css`,
@@ -153,10 +156,6 @@ export default {
   ],
   module: {
     rules: [{
-      test: /\.(js|mjs|jsx|ts|tsx)$/,
-      include: srcDirs,
-      use: [{ loader: 'eslint-loader' }]
-    }, {
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: srcDirs,
       use: ['thread-loader', 'babel-loader']
