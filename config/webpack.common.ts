@@ -26,6 +26,7 @@ const scriptDir = 'javascript';
 const styleDir = 'stylesheets';
 const imagesDir = 'images';
 const fontDir = 'fonts';
+const assetsDir = 'assets';
 
 const nodeModuleDir = path.join(appHome, 'node_modules');
 
@@ -369,8 +370,11 @@ export default {
       test: /\.svg/,
       use: getImageLoader('image/svg+xml')
     }, {
-      test: /\.(woff|eot|ttf|xls|xlsx|doc|docx)/,
+      test: /\.(woff|eot|ttf)/,
       use: [`file-loader?name=${fontDir}/[name]-[hash].[ext]`]
+    }, {
+      test: /\.(xls|xlsx|doc|docx)/,
+      use: [`file-loader?name=${assetsDir}/[name]-[hash].[ext]`]
     }]
   }
 };
