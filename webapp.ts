@@ -3,11 +3,14 @@
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/2
  */
-import * as program from 'commander';
+import { Command } from 'commander';
 import * as path from 'path';
 import templates from './template';
 
 const pkg = require('./package.json');
+
+
+const program = new Command();
 
 program
   .version(pkg.version, '-v, --version')
@@ -19,14 +22,14 @@ program
   .description(`创建一个Web app.
 
   模板列表:
-    ${templates.map(({name, describe}) => `${name} - ${describe}`).join('\n    ')}
+    ${templates.map(({ name, describe }) => `${name} - ${describe}`).join('\n    ')}
 
   样例:
     arapp create -t react foo
 `)
   .option('-t, --template', '模板名称', 'react')
   .action((command, options) => {
-    console.log(command, options.template)
+    console.log(command, options.template);
   })
 ;
 
