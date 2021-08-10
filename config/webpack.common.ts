@@ -26,7 +26,7 @@ const scriptDir = 'javascript';
 const styleDir = 'stylesheets';
 const imagesDir = 'images';
 const fontDir = 'fonts';
-const assetsDir = 'assets';
+const fileDir = 'files';
 
 const nodeModuleDir = path.join(appHome, 'node_modules');
 
@@ -40,10 +40,6 @@ const assets = [{
   publicPath: `./${scriptDir}`,
   outputPath: scriptDir
 }];
-
-function getImageLoader(mimetype) {
-  return `url-loader?limit=10000&mimetype=${mimetype}&esModule=false&name=${imagesDir}/[name]-[hash].[ext]`;
-}
 
 const entry: any = {};
 const plugins = [];
@@ -186,16 +182,12 @@ export default {
       exclude: /\.module\.css$/i,
       use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          // you can specify a publicPath here
-          // by default it use publicPath in webpackOptions.output
-          publicPath: '../'
-        }
       }, {
         loader: 'css-loader',
         options: {
           sourceMap: DEBUG,
-          importLoaders: 1
+          importLoaders: 1,
+          url: true
         }
       }, {
         loader: 'postcss-loader',
@@ -212,17 +204,13 @@ export default {
       test: /\.module\.css$/i,
       use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          // you can specify a publicPath here
-          // by default it use publicPath in webpackOptions.output
-          publicPath: '../'
-        }
       }, {
         loader: 'css-loader',
         options: {
           sourceMap: DEBUG,
           importLoaders: 1,
-          modules: true
+          modules: true,
+          url: true
         }
       }, {
         loader: 'postcss-loader',
@@ -241,9 +229,6 @@ export default {
       exclude: /\.module\.less$/i,
       use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: '../'
-        }
       }, {
         loader: 'css-loader',
         options: {
@@ -274,9 +259,6 @@ export default {
       test: /\.module\.less$/i,
       use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: '../'
-        }
       }, {
         loader: 'css-loader',
         options: {
@@ -308,9 +290,6 @@ export default {
       exclude: /\.module\.(sa|sc)ss$/i,
       use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: '../'
-        }
       }, {
         loader: 'css-loader',
         options: {
@@ -320,7 +299,8 @@ export default {
       }, {
         loader: 'postcss-loader',
         options: {
-          sourceMap: DEBUG, postcssOptions: {
+          sourceMap: DEBUG,
+          postcssOptions: {
             plugins: [
               'postcss-preset-env'
             ]
@@ -334,9 +314,6 @@ export default {
       test: /\.module\.(sa|sc|c)ss$/i,
       use: [DEBUG ? 'style-loader' : {
         loader: MiniCssExtractPlugin.loader,
-        options: {
-          publicPath: '../'
-        }
       }, {
         loader: 'css-loader',
         options: {
@@ -358,23 +335,29 @@ export default {
         options: { sourceMap: DEBUG }
       }]
     }, {
-      test: /\.gif/,
-      use: getImageLoader('image/gif')
-    }, {
-      test: /\.jpg/,
-      use: getImageLoader('image/jpg')
-    }, {
-      test: /\.png/,
-      use: getImageLoader('image/png')
-    }, {
-      test: /\.svg/,
-      use: getImageLoader('image/svg+xml')
+      test: /\.(png|jpe?g|gif|svg)$/i,
+      type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          // 64 kb
+          maxSize: 1024 * 64
+        }
+      },
+      generator: {
+        filename: `${imagesDir}/[name]-[hash].[ext]`
+      }
     }, {
       test: /\.(woff|eot|ttf)/,
-      use: [`file-loader?name=${fontDir}/[name]-[hash].[ext]`]
+      type: 'asset/resource',
+      generator: {
+        filename: `${fontDir}/[name]-[hash].[ext]`
+      },
     }, {
       test: /\.(xls|xlsx|doc|docx)/,
-      use: [`file-loader?name=${assetsDir}/[name]-[hash].[ext]`]
+      type: 'asset/resource',
+      generator: {
+        filename: `${fileDir}/[name]-[hash].[ext]`
+      }
     }]
   }
 };
