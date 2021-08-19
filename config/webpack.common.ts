@@ -344,19 +344,19 @@ export default {
         }
       },
       generator: {
-        filename: `${imagesDir}/[name]-[hash].[ext]`
+        filename: `${imagesDir}/[name]-[hash][ext]`
       }
     }, {
       test: /\.(woff|eot|ttf)/,
       type: 'asset/resource',
       generator: {
-        filename: `${fontDir}/[name]-[hash].[ext]`
+        filename: `${fontDir}/[name]-[hash][ext]`
       },
     }, {
       test: /\.(xls|xlsx|doc|docx)/,
       type: 'asset/resource',
       generator: {
-        filename: `${fileDir}/[name]-[hash].[ext]`
+        filename: `${fileDir}/[name]-[hash][ext]`
       }
     }]
   }
