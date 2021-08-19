@@ -148,7 +148,8 @@ export default {
     ...plugins,
     new MiniCssExtractPlugin({
       filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[fullhash].css`,
-      chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[fullhash].css`
+      chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[fullhash].css`,
+      ignoreOrder: true
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     // new AddAssetHtmlPlugin(assets),
