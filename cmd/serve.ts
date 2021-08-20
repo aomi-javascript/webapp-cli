@@ -42,7 +42,6 @@ export function execute() {
     ...devServer
   };
 
-  WebpackDevServer.addDevServerEntrypoints(configWrapper, serverConfig);
 
   const compiler = webpack(configWrapper);
 
