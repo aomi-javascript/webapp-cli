@@ -19,17 +19,12 @@ export function execute() {
 
   const serverConfig = {
     hot: true,
-    contentBase: config.output.path,
     compress: true,
-    disableHostCheck: true,
     historyApiFallback: true,
     host: '0.0.0.0',
     port: 3000,
-    quiet: false,
-    watchOptions: {
-      ignored: ['node_modules'],
-      aggregateTimeout: 300,
-      poll: 1500
+    client: {
+      progress: true,
     },
     proxy: {
       '/api/*': {
@@ -45,8 +40,6 @@ export function execute() {
 
   const compiler = webpack(configWrapper);
 
-  const server = new WebpackDevServer(compiler, serverConfig);
-  server.listen(serverConfig.port, serverConfig.host, () => {
-    console.log(`dev server listening on ${serverConfig.host}:${serverConfig.port}`);
-  });
+  const server = new WebpackDevServer(serverConfig, compiler);
+  server.listen(serverConfig.port, serverConfig.host);
 }
