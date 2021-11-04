@@ -18,7 +18,6 @@ export function execute() {
   const { api, ...devServer } = userDevUser;
 
   const serverConfig = {
-    hot: true,
     compress: true,
     historyApiFallback: true,
     host: '0.0.0.0',
