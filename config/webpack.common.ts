@@ -123,19 +123,6 @@ export default {
     modules: ['node_modules']
   },
   context: srcDirs,
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        common: {
-          name: `chunk-common`,
-          minChunks: 2,
-          priority: -20,
-          chunks: 'initial',
-          reuseExistingChunk: true
-        }
-      }
-    }
-  },
   plugins: [
     new webpack.DefinePlugin({ // 定义环境变量
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
