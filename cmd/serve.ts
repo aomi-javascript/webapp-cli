@@ -23,7 +23,7 @@ export function execute() {
     host: '0.0.0.0',
     port: 3000,
     client: {
-      progress: true,
+      progress: true
     },
     proxy: {
       '/api/*': {
@@ -40,5 +40,9 @@ export function execute() {
   const compiler = webpack(configWrapper);
 
   const server = new WebpackDevServer(serverConfig, compiler);
-  server.listen(serverConfig.port, serverConfig.host);
+  server.listen(serverConfig.port, serverConfig.host, (err) => {
+    if (err) {
+      console.error('服务启动失败', err);
+    }
+  });
 }
