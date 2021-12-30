@@ -2,6 +2,13 @@
 
 一个Web App应用脚手架
 
+### 自动根据环境的不同读取用户项目目录下的文件
+```
+webpack.common.js
+webpack.dev.js
+webpack.prod.js
+```
+
 ### `webapp.config.js`
 
 | 参数	 | 说明 | 类型 | 默认值 |

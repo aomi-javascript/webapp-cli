@@ -138,7 +138,8 @@ export default {
       chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[fullhash].css`,
       ignoreOrder: true
     }),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
+    // moment 组件自行根据项目中的需求进行增加替换
+    // new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     // new AddAssetHtmlPlugin(assets),
     ...dll.map(dllName => new webpack.DllReferencePlugin({
       context: appHome,
@@ -148,7 +149,6 @@ export default {
   module: {
     rules: [{
       test: /\.(js|mjs|jsx|ts|tsx)$/,
-      include: srcDirs,
       use: ['thread-loader', 'babel-loader']
     }, {
       test: /\.html$/,
@@ -169,7 +169,7 @@ export default {
       test: /\.css$/,
       exclude: /\.module\.css$/i,
       use: [DEBUG ? 'style-loader' : {
-        loader: MiniCssExtractPlugin.loader,
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: 'css-loader',
         options: {
@@ -191,7 +191,7 @@ export default {
       // For CSS modules
       test: /\.module\.css$/i,
       use: [DEBUG ? 'style-loader' : {
-        loader: MiniCssExtractPlugin.loader,
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: 'css-loader',
         options: {
@@ -216,7 +216,7 @@ export default {
       test: /\.less$/,
       exclude: /\.module\.less$/i,
       use: [DEBUG ? 'style-loader' : {
-        loader: MiniCssExtractPlugin.loader,
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: 'css-loader',
         options: {
@@ -246,7 +246,7 @@ export default {
       // For CSS modules
       test: /\.module\.less$/i,
       use: [DEBUG ? 'style-loader' : {
-        loader: MiniCssExtractPlugin.loader,
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: 'css-loader',
         options: {
@@ -277,7 +277,7 @@ export default {
       test: /\.(sa|sc)ss$/,
       exclude: /\.module\.(sa|sc)ss$/i,
       use: [DEBUG ? 'style-loader' : {
-        loader: MiniCssExtractPlugin.loader,
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: 'css-loader',
         options: {
@@ -301,7 +301,7 @@ export default {
     }, {
       test: /\.module\.(sa|sc|c)ss$/i,
       use: [DEBUG ? 'style-loader' : {
-        loader: MiniCssExtractPlugin.loader,
+        loader: MiniCssExtractPlugin.loader
       }, {
         loader: 'css-loader',
         options: {
@@ -339,7 +339,7 @@ export default {
       type: 'asset/resource',
       generator: {
         filename: `${fontDir}/[name]-[hash][ext]`
-      },
+      }
     }, {
       test: /\.(xls|xlsx|doc|docx)/,
       type: 'asset/resource',
