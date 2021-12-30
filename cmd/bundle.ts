@@ -9,7 +9,8 @@ import getWebpackConfig from '../utils/getWebpackConfig';
  */
 export function execute() {
   const config = getWebpackConfig('prod');
-  webpack(config).run((err: any, stats) => {
+  const compiler = webpack(config);
+  compiler.run((err: any, stats) => {
     if (err) {
       console.error(err.stack || err);
       if (err.details) {
@@ -20,7 +21,7 @@ export function execute() {
 
     let method = 'log';
     if (stats.hasErrors()) {
-      method = 'error'
+      method = 'error';
     } else if (stats.hasWarnings()) {
       method = 'warn';
     }
@@ -28,5 +29,8 @@ export function execute() {
       chunks: false,  // Makes the build much quieter
       colors: true    // Shows colors in the console
     }));
+    compiler.close((e, r) => {
+      e && console.log('关闭compiler失败', e);
+    });
   });
 }

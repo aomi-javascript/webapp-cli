@@ -3,7 +3,7 @@ import * as WebpackDevServer from 'webpack-dev-server';
 import * as SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
 
 import getWebpackConfig from '../utils/getWebpackConfig';
-import { getWebappConfig } from '../utils/getWebappConfig';
+import { getWebappConfig, WebappConfig } from '../utils/getWebappConfig';
 
 /**
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
@@ -13,9 +13,7 @@ export function execute() {
   const smp = new SpeedMeasurePlugin();
   const configWrapper = smp.wrap(config);
 
-  const { devServer: userDevUser = {} }: any = getWebappConfig();
-
-  const { api, ...devServer } = userDevUser;
+  const webappConfig: WebappConfig = getWebappConfig();
 
   const serverConfig = {
     compress: true,
@@ -27,13 +25,13 @@ export function execute() {
     },
     proxy: {
       '/api/*': {
-        target: api || 'http://localhost:8080',
+        target: webappConfig?.devServer?.api || 'http://localhost:8080',
         pathRewrite: { '^/api': '' },
         changeOrigin: true
       }
     },
     open: true,
-    ...devServer
+    ...webappConfig?.devServer
   };
 
 
