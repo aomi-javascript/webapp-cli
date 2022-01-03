@@ -149,7 +149,8 @@ export default {
   module: {
     rules: [{
       test: /\.(js|mjs|jsx|ts|tsx)$/,
-      use: ['thread-loader', 'babel-loader']
+      use: ['thread-loader', 'babel-loader'],
+      include: srcDirs
     }, {
       test: /\.html$/,
       use: [{
