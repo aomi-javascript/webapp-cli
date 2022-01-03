@@ -14,9 +14,12 @@ if (typeof userPkg.bundleAnalyzerPlugin === 'boolean' && userPkg.bundleAnalyzerP
 
 plugins.push(new webpack.HotModuleReplacementPlugin());
 
+/**
+ * cheap-module-source-map 一般来说，生产环境是不配 source-map 的，如果想捕捉线上的代码报错，我们可以用这个
+ */
 export default {
   mode: 'development',
-  devtool: userPkg.devtool || 'cheap-module-source-map',
+  devtool: userPkg.devtool || 'inline-source-map',
   plugins,
   watchOptions: {
     ignored: /node_modules/
