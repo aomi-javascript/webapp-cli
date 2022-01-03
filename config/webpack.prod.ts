@@ -10,7 +10,16 @@ export default {
   optimization: {
     chunkIds: 'named',
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      cacheGroups: {
+        common: {
+          name: `chunk-common`,
+          minChunks: 2,
+          priority: -20,
+          chunks: 'initial',
+          reuseExistingChunk: true
+        }
+      }
     },
     minimize: true,
     minimizer: [new TerserPlugin({
