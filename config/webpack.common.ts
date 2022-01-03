@@ -51,7 +51,10 @@ if (userPkg.mulitApp) {
   appSrcDirs.forEach(app => {
     const entryFile = path.join(appRoot, app, 'index.web.tsx');
     console.log(`${app}入口JS: ${entryFile}`);
-    entry[app] = entryFile;
+    entry[app] = {
+      import: entryFile,
+      filename: `${app}/[name][ext]`
+    };
 
     const indexHtmljs = path.join(appRoot, app, 'index.html.js');
     let template;
@@ -63,7 +66,7 @@ if (userPkg.mulitApp) {
     console.log(`${app}入口html： ${template}`);
     plugins.push(new HtmlWebpackPlugin({
       template,
-      filename: `${app}.html`,
+      filename: `${app}/index.html`,
       debug: DEBUG,
       env: process.env,
       excludeChunks: appSrcDirs.filter(item => item !== app)
