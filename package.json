@@ -1,6 +1,6 @@
 {
   "name": "@aomi/webapp-cli",
-  "version": "1.1.27-Alpha.17",
+  "version": "1.1.27-Alpha.18",
   "description": "a web app cli",
   "main": "index.js",
   "scripts": {
