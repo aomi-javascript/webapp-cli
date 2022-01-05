@@ -21,6 +21,7 @@ const PROD = NODE_ENV === 'production';
 const appHome = process.cwd();
 console.log(`APP_HOME=${appHome}`);
 const srcDirs = path.join(appHome, 'src');
+console.log(`SRC_HOME=${srcDirs}`);
 const buildDir = path.join(appHome, 'build', 'app');
 const scriptDir = 'javascript';
 const styleDir = 'stylesheets';
@@ -48,13 +49,18 @@ if (userPkg.mulitApp) {
   console.log('多应用程序');
   const appRoot = path.join(srcDirs, 'app');
   const appSrcDirs = fs.readdirSync(appRoot);
-  appSrcDirs.forEach(app => {
-    const entryFile = path.join(appRoot, app, 'index.web.tsx');
+  appSrcDirs.filter(item => {
+    const info = fs.statSync(path.join(appRoot, item));
+    return info.isDirectory();
+  }).forEach(app => {
+    let entryFile;
+    if (fs.existsSync(path.join(appRoot, app, 'index.web.tsx'))) {
+      entryFile = path.join(appRoot, app, 'index.web.tsx');
+    } else if (fs.existsSync(path.join(appRoot, app, 'index.web.ts'))) {
+      entryFile = path.join(appRoot, app, 'index.web.ts');
+    }
     console.log(`${app}入口JS: ${entryFile}`);
-    entry[app] = {
-      import: entryFile,
-      filename: `${app}/[name][ext]`
-    };
+    entry[app] = entryFile;
 
     const indexHtmljs = path.join(appRoot, app, 'index.html.js');
     let template;
@@ -66,7 +72,7 @@ if (userPkg.mulitApp) {
     console.log(`${app}入口html： ${template}`);
     plugins.push(new HtmlWebpackPlugin({
       template,
-      filename: `${app}/index.html`,
+      filename: `${app}.html`,
       debug: DEBUG,
       env: process.env,
       excludeChunks: appSrcDirs.filter(item => item !== app)
@@ -133,7 +139,8 @@ export default {
     new ESLintPlugin({
       extensions: ['ts', 'tsx'],
       fix: true,
-      threads: true
+      // 临时注释掉，有bug 导致dev server 启动卡死
+      // threads: true
     }),
     ...plugins,
     new MiniCssExtractPlugin({
