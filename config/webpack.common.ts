@@ -4,15 +4,14 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 // import * as AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import {getWebappConfig, WebappConfig} from '../utils/getWebappConfig';
 
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 
-import { getWebappConfig, WebappConfig } from '../utils/getWebappConfig';
-
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
-const { NODE_ENV = 'development' } = process.env;
+const {NODE_ENV = 'development'} = process.env;
 
 console.log(`NODE_ENV=${NODE_ENV}`);
 const DEBUG = NODE_ENV !== 'production';
@@ -78,7 +77,7 @@ if (userPkg.mulitApp) {
       excludeChunks: appSrcDirs.filter(item => item !== app)
     }));
   });
-} else {
+} else if (typeof userPkg.enableHtmlWebpackPlugin === 'boolean' ? userPkg.enableHtmlWebpackPlugin : true) {
   console.log('单用程序');
   entry.app = path.join(srcDirs, 'index.web.tsx');
   plugins.push(new HtmlWebpackPlugin({
@@ -307,7 +306,7 @@ export default {
         }
       }, {
         loader: 'sass-loader',
-        options: { sourceMap: DEBUG }
+        options: {sourceMap: DEBUG}
       }]
     }, {
       test: /\.module\.(sa|sc|c)ss$/i,
@@ -331,7 +330,7 @@ export default {
         }
       }, {
         loader: 'sass-loader',
-        options: { sourceMap: DEBUG }
+        options: {sourceMap: DEBUG}
       }]
     }, {
       test: /\.(png|jpe?g|gif|svg)$/i,

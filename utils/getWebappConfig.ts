@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { Configuration } from 'webpack-dev-server';
+import {Configuration} from 'webpack-dev-server';
 
 export interface WebappConfig {
   devtool?: string | false;
@@ -20,6 +20,12 @@ export interface WebappConfig {
    * markdown-loader options
    */
   markedOptions?: object;
+
+  /**
+   * 启用webpack html 插件
+   * 默认为true
+   */
+  enableHtmlWebpackPlugin?: boolean
 
   devServer?: Configuration & {
     api?: string
