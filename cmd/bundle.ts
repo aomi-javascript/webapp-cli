@@ -1,15 +1,12 @@
-import * as webpack from 'webpack';
-
 import prod from '../config/webpack.prod';
-import getWebpackConfig from '../utils/getWebpackConfig';
+import {getCompiler} from "../utils/compiler";
 
 /**
  * 执行打包任务
  * @author 田尘殇Sean(sean.snow@live.com) create at 2018/10/3
  */
 export function execute() {
-  const config = getWebpackConfig('prod');
-  const compiler = webpack(config);
+  const compiler = getCompiler('prod');
   compiler.run((err: any, stats) => {
     if (err) {
       console.error(err.stack || err);
