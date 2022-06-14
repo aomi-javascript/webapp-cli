@@ -27,6 +27,12 @@ export interface WebappConfig {
    */
   enableHtmlWebpackPlugin?: boolean
 
+  /**
+   * 启用hash作为文件结尾
+   * 默认true
+   */
+  enableHash?: boolean
+
   devServer?: Configuration & {
     api?: string
   };

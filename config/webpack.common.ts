@@ -32,6 +32,11 @@ const nodeModuleDir = path.join(appHome, 'node_modules');
 
 const userPkg: WebappConfig = getWebappConfig();
 
+let enableHash = true;
+if (typeof userPkg.enableHash === 'boolean') {
+  enableHash = userPkg.enableHash;
+}
+
 const dll = Object.keys(userPkg.dllEntry || {});
 
 const assets = [{
@@ -114,8 +119,8 @@ export default {
   entry: () => entry,
   output: {
     path: buildDir,
-    filename: DEBUG ? `${scriptDir}/[name].bundle.js` : `${scriptDir}/[name]-[contenthash].bundle.js`,
-    chunkFilename: DEBUG ? `${scriptDir}/[name].chunk.js` : `${scriptDir}/[name]-[contenthash].chunk.js`
+    filename: DEBUG || !enableHash ? `${scriptDir}/[name].bundle.js` : `${scriptDir}/[name]-[contenthash].bundle.js`,
+    chunkFilename: DEBUG || !enableHash ? `${scriptDir}/[name].chunk.js` : `${scriptDir}/[name]-[contenthash].chunk.js`
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.less', '.sass', 'scss', '.png', '.jpg', '.jpeg'],
@@ -143,8 +148,8 @@ export default {
     }),
     ...plugins,
     new MiniCssExtractPlugin({
-      filename: DEBUG ? `${styleDir}/[name].css` : `${styleDir}/[name].[fullhash].css`,
-      chunkFilename: DEBUG ? `${styleDir}/[id].css` : `${styleDir}/[id].[fullhash].css`,
+      filename: DEBUG || !enableHash ? `${styleDir}/[name].css` : `${styleDir}/[name].[fullhash].css`,
+      chunkFilename: DEBUG || !enableHash ? `${styleDir}/[id].css` : `${styleDir}/[id].[fullhash].css`,
       ignoreOrder: true
     }),
     // moment 组件自行根据项目中的需求进行增加替换
