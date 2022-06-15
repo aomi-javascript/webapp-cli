@@ -1,11 +1,11 @@
 {
   "name": "@aomi/webapp-cli",
-  "version": "1.1.27-Alpha.23",
+  "version": "1.0.0",
   "description": "a web app cli",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aomitech/webapp-cli.git"
+    "url": "git@github.com:aomitech/webapp-cli.git"
   },
   "keywords": [
     "React"
