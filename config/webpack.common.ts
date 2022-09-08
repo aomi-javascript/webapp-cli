@@ -338,7 +338,7 @@ export default {
         options: {sourceMap: DEBUG}
       }]
     }, {
-      test: /\.(png|jpe?g|gif|svg)$/i,
+      test: /\.(png|jpe?g|gif|svg|webp)$/i,
       type: 'asset',
       parser: {
         dataUrlCondition: {
